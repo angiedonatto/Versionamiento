@@ -54,6 +54,19 @@ def main():
     results['clean_dvc_pull'] = recovery.get('dvc_passed', False)
     results['hf_download_both_sha_and_predictions'] = recovery.get('passed', False)
     results['huggingface_publication'] = Path('evidencias/huggingface.json').exists()
+    if results['huggingface_publication']:
+        pubs=read_json('evidencias/huggingface.json')
+        comparison=read_json('evidencias/recuperacion/comparacion.json')
+        assert pubs['v1']['sha'] != pubs['v2']['sha']
+        assert pubs['v1']['model_sha256'] != pubs['v2']['model_sha256']
+        for version in ['v1','v2']:
+            assert comparison['versions'][version]['sha']==pubs[version]['sha']
+            assert comparison['versions'][version]['downloaded_from_hf']
+            assert comparison['versions'][version]['private']
+    anchors=read_json('evidencias/invariantes-finalizacion.json')
+    for path, expected in anchors['immutable_files'].items():
+        assert sha(path)==expected, path
+    results['frozen_artifacts_and_original_test_unchanged']=True
     github = read_json('evidencias/github.json') if Path('evidencias/github.json').exists() else {}
     results['github_access'] = bool(github.get('push_verified') and github.get('read_verified'))
     write_json('evidencias/verificacion-final.json', {'verified_at_utc': now(), 'checks': results,

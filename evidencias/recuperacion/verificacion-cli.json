@@ -1,0 +1,7 @@
+{
+  "verified_at_utc": "2026-10-31T01:50:53.861239+00:00",
+  "passed": true,
+  "rows": 64,
+  "sha256": "24d7f23d440fa45f53925e2d6be96aa815a68f11102a5ba03a47ce888f0ecded",
+  "method": "Comandos download_model y lifecycle predict del README ejecutados desde el checkout y venv limpios; salida idéntica a la recuperación HF v2."
+}

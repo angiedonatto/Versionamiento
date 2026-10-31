@@ -1,0 +1,5 @@
+
+[2026-10-31T01:48:41.158306+00:00] cwd=/workspace/Versionamiento
+$ /workspace/defiende-venv/bin/python -m src.finalize
+Invariantes verificadas: selección, modelos y test intactos; dos descargas HF verificadas.
+{"command": ["/workspace/defiende-venv/bin/python", "-m", "src.finalize"], "started_at_utc": "2026-10-31T01:48:41.158306+00:00", "finished_at_utc": "2026-10-31T01:48:42.151738+00:00", "elapsed_seconds": 0.9934420729999829, "exit_code": 0}

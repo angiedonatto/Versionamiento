@@ -4,7 +4,7 @@
 - Grupo de cada integrante: **[A/B POR COMPLETAR]**.
 - Contribución humana: **[CADA INTEGRANTE DEBE DECLARAR Y COMPRENDER SU APORTE]**.
 - GitHub solicitado: https://github.com/angiedonatto/Versionamiento
-- Revisión base del paquete: `1e5a76f75ca2ff40301ececf37cdc021cefee860`. El commit final de empaquetado se registra en `revision-entrega.txt` junto al ZIP y en el historial Git; no se inventa una autorreferencia de commit.
+- Revisión base del paquete: `37a7b2ebe7551ad4f1c37f7ef4e5a4f726f7d2d9`. El commit final de empaquetado se registra en `revision-entrega.txt` junto al ZIP y en el historial Git; no se inventa una autorreferencia de commit.
 - Publicación GitHub: PUSH Y CLON REMOTO VERIFICADOS. El usuario autorizó publicar incluso si el repositorio es público; no se cambió su privacidad.
 - Acceso de la cuenta del docente: no comprobado; si el repositorio es privado, conceder lectura mediante invitación.
 - Historial sin dependencia de GitHub: `historial.bundle` dentro del ZIP; `git clone historial.bundle proyecto`.
@@ -21,7 +21,7 @@
 - Familia: LogisticRegression; parámetros: `{'C': 0.1, 'max_iter': 1000, 'solver': 'liblinear'}`.
 - Umbral: `0.5`; ataque si score >= umbral.
 - Modelo SHA256: `379b81212257ce54700242b7568e75ba5cc76d444cd25101dc589494bd9d6f40`.
-- HF: **BLOQUEADO: HF_TOKEN no disponible o acceso sin resolver; no existe URL/SHA publicado comprobado.**
+- HF: https://huggingface.co/angiedonatto/defiende-el-servidor/tree/989ec48decb0f32dfc4ae448389e813bc0fc38c2 (privado; SHA completo `989ec48decb0f32dfc4ae448389e813bc0fc38c2`)
 
 ### v2
 
@@ -33,7 +33,7 @@
 - Familia: DecisionTreeClassifier; parámetros: `{'max_depth': 16, 'min_samples_leaf': 5}`.
 - Umbral: `0.5`; ataque si score >= umbral.
 - Modelo SHA256: `a2d7aebf559a8393bb55a3ad80f698d1777bfe971eed850f463bbc6d96cdc95c`.
-- HF: **BLOQUEADO: HF_TOKEN no disponible o acceso sin resolver; no existe URL/SHA publicado comprobado.**
+- HF: https://huggingface.co/angiedonatto/defiende-el-servidor/tree/9c8fd844aac0f3c04238a96dd7e43bd6b4fe7f27 (privado; SHA completo `9c8fd844aac0f3c04238a96dd7e43bd6b4fe7f27`)
 
 ## Evidencias y almacenamiento
 
@@ -44,6 +44,8 @@
 - `evidencias/mlflow/<run_id>/`: entidad real exportada `mlflow-record.json`, metadatos `run.json` y pipeline completo `pipeline.joblib`.
 - `evidencias/modelos/v1/` y `v2/`: bundles completos preparados localmente, con pipeline, threshold/config, model card, features y dependencias. No equivalen a publicación ni descarga desde HF.
 - `evidencias/seleccion.json`: decisión de validation fechada, incluida en tag v2 antes de test; no se modifica después de test.
+- `evidencias/trazabilidad-final.json`: SHA HF de ambas versiones, huellas originales, cronología real de publicación posterior al test y vínculo con el mismo artefacto evaluado.
+- `evidencias/invariantes-finalizacion.json`: huellas ancla del commit anterior; permiten comprobar que no se alteraron selección, test, umbral, modelos ni muestra.
 - `evidencias/metricas-test.json`, `predicciones-test.csv`, `recalculo-test.json`: test completo y comprobación por CSV.
 - `evidencias/recuperacion/`: muestra fija de 64 filas, salidas antes/después (estas últimas sólo si HF funciona), hashes, log y resultado real.
 - `comprobacion-local-suplementaria.json` y `local-suplementaria-limpia.log`: prueba adicional exitosa de ambas versiones desde Git local en checkout/venv nuevos; no sustituye HF. Los archivos `v*-local-despues.csv` se distinguen de las salidas HF.
@@ -53,12 +55,14 @@
 - `informe.pdf`: máximo cinco páginas; generado desde evidencia real.
 - **`dvc-storage.zip` se entrega aparte**. Extraer junto al proyecto: debe quedar `../dvc-storage`. `.dvc/config` configura remote `entrega`. Ejecutar `DVC_SITE_CACHE_DIR="$PWD/.runtime/dvc-site" dvc pull`.
 - Ubicación de los tres entregables: directorio de entrega `/workspace/entrega-defiende/` de esta tarea. No es un servicio público: descargar y adjuntar al canal del profesor, o compartir carpeta con permiso de lectura. Sin esa acción no se afirma acceso docente.
+- Distribución GitHub (privada; requiere permiso de lectura): https://github.com/angiedonatto/Versionamiento/releases/tag/entrega-final-2026-10-30 . La evidencia de publicación y descarga se adjunta como `verificacion-publicacion.json` junto a los entregables.
+- `auditoria-cumplimiento.md` y `.json` junto al ZIP: auditoría definitiva de los ocho requisitos y de cada componente de la rúbrica, incluidos pendientes administrativos.
 
 ## Ejecución medida y limitaciones
 
-Python 3.12.14, Linux x86_64, 5 CPU visibles. Tiempos de fit+validación+serialización: lr_c01=3.131s, lr_c10=15.703s, tree_d08=2.519s, tree_d16=5.054s. Auditoría=10.593s. Recuperación=68.029175087s. Máximo RSS por proceso en run.json. Sin GPU ni muestreo.
+Python 3.12.14, Linux x86_64, 5 CPU visibles. Tiempos de fit+validación+serialización: lr_c01=3.131s, lr_c10=15.703s, tree_d08=2.519s, tree_d16=5.054s. Auditoría=10.593s. Recuperación=57.112014585s. Máximo RSS por proceso en run.json. Sin GPU ni muestreo.
 
-Recuperación DVC comprobada: True; recuperación HF completa: False. Log: `evidencias/recuperacion/recuperacion.log`. Bloqueo: No hay SHAs de Hugging Face publicados: DVC verificado; recuperación HF bloqueada por acceso..
+Recuperación DVC comprobada: True; recuperación HF completa: True. Log: `evidencias/recuperacion/recuperacion.log`. Bloqueo: ninguno registrado.
 
 La selección de 17 umbrales por modelo en una sola validation puede ser optimista.
 Los grupos idénticos no cruzan train/validation, pero las particiones publicadas
@@ -78,22 +82,27 @@ No se usaron soluciones docentes ni fragmentos adaptados de terceros; se usaron
 APIs de herramientas de código abierto, identificadas en requirements.txt.
 Datos de UNSW-NB15 con atribución y condiciones académicas de la fuente oficial.
 
-## Operaciones externas pendientes (si no hay evidencia de éxito)
+## Recuperación y cierre
 
-1. En configuración del entorno: guardar HF_TOKEN con escritura a huggingface.co
-   y aplicar dominios guardados. Nunca ponerlo en Git ni en el chat.
-2. `python -m src.lifecycle publish` crea automáticamente repo HF privado en la
-   cuenta del token. Sólo ejecutar si no existe ya publicación registrada; preserva SHA.
-3. `git add evidencias/huggingface.json evidencias/publicacion-congelada.json && git commit -m 'publicar referencias HF verificables'`.
-4. `python -m src.recover --storage ../dvc-storage.zip --git-source . --revision HEAD`.
-5. GitHub: el usuario autorizó expresamente publicar incluso si el repositorio
-   es público. No volver a pedir autorización ni cambiar su privacidad. Actualizar
-   con `git push origin HEAD:main --tags` y comprobar el SHA con `git ls-remote`.
-   Un Forbidden de la API no demuestra que Git push esté bloqueado: usar la
-   operación Git requerida y el proxy suministrado.
-6. Verificar lectura GitHub/HF; invitar al docente con su usuario en cada plataforma.
-7. Regenerar informe, verificación y ZIP con las nuevas evidencias. No volver a
-   evaluar test ni modificar pipeline, selección o umbral después del test.
+Las revisiones HF publicadas están en huggingface.json y los resultados reales
+en recuperacion/resultado.json. Un `passed=true` sólo se emite después de descargar
+ambas revisiones por SHA en un venv nuevo y reproducir las predicciones.
+Para repetir la recuperación (sin entrenar ni reevaluar test):
+
+```bash
+python -m src.recover --storage ../dvc-storage.zip   --git-source https://github.com/angiedonatto/Versionamiento.git   --revision "$(git rev-parse HEAD)"
+python -m src.lifecycle recompute
+python -m src.verify
+```
+
+HF_TOKEN debe ser propio o proporcionado por el entorno seguro y tener permiso
+de lectura del repositorio privado. Nunca entregar ni publicar credenciales.
+Los SHA evaluados no se sustituyen por main, tags móviles o nuevas serializaciones.
+
+Pendientes de la entrega humana: completar nombres/grupos/contribuciones y
+comprobar el acceso de la cuenta del profesor a GitHub, la release y HF privado.
+La prueba con la cuenta propietaria no demuestra acceso del docente. No se
+inventan usuarios ni se afirma que se enviaron invitaciones o la entrega.
 
 Texto de envío: `mensaje-profesor.txt` junto a los entregables. Completar campos
 personales y accesos antes de enviar por **un único canal** (Teams o correo).

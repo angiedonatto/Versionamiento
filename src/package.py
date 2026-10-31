@@ -42,6 +42,9 @@ def main():
     if storage.resolve() != (target/'dvc-storage.zip').resolve():
         shutil.copy2(storage,target/'dvc-storage.zip')
     hf=read_json('evidencias/huggingface.json') if Path('evidencias/huggingface.json').exists() else {}
+    recovery=read_json('evidencias/recuperacion/resultado.json')
+    comparison=read_json('evidencias/recuperacion/comparacion.json')
+    assert recovery['passed'] and comparison['passed'], 'No empaquetar como recuperación completa sin prueba real'
     model_lines='\n'.join(f'{v}: {hf[v]["url"]}/tree/{hf[v]["sha"]}' if v in hf else f'{v}: PENDIENTE publicación HF por falta de token/acceso; no existe SHA verificable.' for v in ['v1','v2'])
     text=f'''MLOps — Defiende el servidor — Grupo [A/B] — [Integrantes]
 
@@ -50,11 +53,11 @@ Profesor Julián:
 Integrantes y grupo por persona: [COMPLETAR NOMBRES COMPLETOS Y GRUPO].
 Comparto la implementación y evidencias ejecutadas del taller.
 Repositorio de código solicitado: https://github.com/angiedonatto/Versionamiento
-Commit local final de esta entrega: {commit}
+Commit final de esta entrega: {commit}
 La publicación se verifica con Git push y lectura remota; evidencia en github.json
 y verificacion-publicacion.json junto a estos archivos. El acceso de su cuenta
 debe comprobarse antes de enviar si el repositorio es privado.
-Revisiones locales v1: {refs['v1']}; v2: {refs['v2']}.
+Revisiones Git v1: {refs['v1']}; v2: {refs['v2']}.
 Modelos:
 {model_lines}
 
@@ -62,10 +65,12 @@ Adjuntos: proyecto.zip, informe.pdf y dvc-storage.zip (respaldo DVC separado).
 Para DVC, extraer dvc-storage.zip junto al proyecto y ejecutar dvc pull según README.
 El ZIP incluye un bundle Git recuperable, código, cuatro runs MLflow exportados,
 auditoría, selección congelada y 82332 predicciones de la única evaluación final.
-Las métricas se recalcularon y coincidieron; el respaldo DVC se recuperó en un
-venv y checkout nuevos. La comprobación local adicional de v1/v2 coincidió en
-64 filas. La recuperación exigida desde Hugging Face permanece pendiente si
-no se indican arriba sus dos SHA verificados; no se afirma completada.
+Las métricas se recalcularon desde el CSV original y coincidieron; no se repitió
+la evaluación test. La recuperación completa desde GitHub, el respaldo DVC y
+ambas revisiones HF se ejecutó en carpeta, venv y cachés nuevos. Las {comparison['rows']} filas
+fijas reprodujeron clases exactas; diferencia máxima de scores en v1:
+{comparison['versions']['v1']['max_score_difference']}; en v2: {comparison['versions']['v2']['max_score_difference']}.
+Log y comparación en evidencias/recuperacion/; auditoría detallada adjunta.
 
 Limitaciones y uso de Codex están declarados en entrega.md e informe.pdf.
 Para repositorios privados, solicitaré su usuario GitHub y HF por este mismo

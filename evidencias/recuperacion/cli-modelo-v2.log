@@ -1,0 +1,14 @@
+
+[2026-10-31T01:50:24.969399+00:00] cwd=/tmp/defiende-recuperacion-lf9oj3ef/proyecto
+$ /tmp/defiende-recuperacion-lf9oj3ef/venv/bin/python -m src.download_model --version v2 --output /tmp/defiende-recuperacion-lf9oj3ef/modelo-cli-v2
+
+Fetching 6 files:   0%|          | 0/6 [00:00<?, ?it/s]
+Fetching 6 files:  17%|█▋        | 1/6 [00:00<00:00,  6.11it/s]
+Fetching 6 files: 100%|██████████| 6/6 [00:00<00:00, 19.09it/s]
+Fetching 6 files: 100%|██████████| 6/6 [00:00<00:00, 19.07it/s]
+angiedonatto/defiende-el-servidor 9c8fd844aac0f3c04238a96dd7e43bd6b4fe7f27 a2d7aebf559a8393bb55a3ad80f698d1777bfe971eed850f463bbc6d96cdc95c
+{"command": ["/tmp/defiende-recuperacion-lf9oj3ef/venv/bin/python", "-m", "src.download_model", "--version", "v2", "--output", "/tmp/defiende-recuperacion-lf9oj3ef/modelo-cli-v2"], "started_at_utc": "2026-10-31T01:50:24.969399+00:00", "finished_at_utc": "2026-10-31T01:50:26.589044+00:00", "elapsed_seconds": 1.619657922999977, "exit_code": 0}
+
+[2026-10-31T01:50:27.540906+00:00] cwd=/tmp/defiende-recuperacion-lf9oj3ef/proyecto
+$ /tmp/defiende-recuperacion-lf9oj3ef/venv/bin/python -m src.lifecycle predict --model-dir /tmp/defiende-recuperacion-lf9oj3ef/modelo-cli-v2 --input evidencias/recuperacion/muestra-validation.csv --output /workspace/Versionamiento/evidencias/recuperacion/prediccion-cli-v2.csv
+{"command": ["/tmp/defiende-recuperacion-lf9oj3ef/venv/bin/python", "-m", "src.lifecycle", "predict", "--model-dir", "/tmp/defiende-recuperacion-lf9oj3ef/modelo-cli-v2", "--input", "evidencias/recuperacion/muestra-validation.csv", "--output", "/workspace/Versionamiento/evidencias/recuperacion/prediccion-cli-v2.csv"], "started_at_utc": "2026-10-31T01:50:27.540906+00:00", "finished_at_utc": "2026-10-31T01:50:28.547445+00:00", "elapsed_seconds": 1.0065460380000104, "exit_code": 0}

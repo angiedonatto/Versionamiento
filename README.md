@@ -76,7 +76,12 @@ análisis de otros umbrales está en `umbrales-validation.json`.
 
 ## Descargar modelos por SHA y predecir
 
-Cuando `evidencias/huggingface.json` contiene SHAs publicados:
+Ambas versiones están publicadas en el repositorio **privado**
+https://huggingface.co/angiedonatto/defiende-el-servidor . Los SHA completos
+inmutables se conservan en `evidencias/huggingface.json`; `v1`/`v2` son tags auxiliares.
+Se requiere un `HF_TOKEN` propio con permiso de lectura. Configurarlo mediante
+secretos seguros del entorno o el inicio de sesión interactivo de Hugging Face;
+nunca incluirlo en comandos guardados, Git, ZIP o mensajes.
 
 ```bash
 python -m src.download_model --version v1 --output descargado-v1
@@ -92,7 +97,9 @@ HF con permisos de lectura al repo privado. Sólo cargar joblib de confianza.
 ## Recuperación independiente y test reservado
 
 ```bash
-python -m src.recover --storage ../dvc-storage.zip --git-source . --revision HEAD
+python -m src.recover --storage ../dvc-storage.zip \
+  --git-source https://github.com/angiedonatto/Versionamiento.git \
+  --revision "$(git rev-parse HEAD)"
 python -m src.lifecycle recompute
 python -m src.verify
 ```
@@ -101,6 +108,9 @@ python -m src.verify
 el remote entregado, hace `dvc pull`, verifica huellas y descarga ambas revisiones
 HF por SHA. Compara exactamente 64 filas fijas y clases; tolerancia de scores
 1e-12. Un bloqueo HF deja exit code 2 y `passed=false`, aunque DVC haya pasado.
+La ejecución definitiva usa una revisión Git completa, un venv recién creado
+y rutas de caché vacías, y obtiene los pipelines exclusivamente desde HF por SHA.
+Los fallos iniciales sin credenciales permanecen en `recuperacion/historico/`.
 
 La evaluación `python -m src.lifecycle test` sólo se permite una vez y después
 del tag Git `v2` con selección congelada. **No repetirla en la entrega**: para
@@ -118,3 +128,16 @@ referencias recuperables de Git, sin datos crudos ni secretos. El informe PDF
 se genera desde JSON/CSV reales con `python -m src.report` y tiene máximo cinco
 páginas. Los pendientes de acceso, si los hay, figuran explícitamente en
 `entrega.md`; no se consideran comprobaciones aprobadas.
+
+## Finalización sin alterar los modelos
+
+No se reentrenó ni se repitió la evaluación del test al publicar los modelos.
+`evidencias/invariantes-finalizacion.json` conserva las huellas originales de la
+selección, los dos pipelines, las referencias, la muestra y el test. La relación
+HF con la evaluación ya realizada se añade en `trazabilidad-final.json`, sin
+modificar `seleccion.json` ni `metricas-test.json`: la publicación HF ocurrió
+después de la evaluación original y se verifica que el artefacto es el mismo.
+
+La auditoría definitiva de los ocho requisitos y los 100 puntos se entrega en
+`auditoria-cumplimiento.md` y `.json` junto al ZIP. La prueba de lectura del
+profesor y los datos personales se distinguen de las comprobaciones técnicas.
