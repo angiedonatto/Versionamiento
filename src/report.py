@@ -10,6 +10,9 @@ from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, PageBreak
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
+import reportlab
 from .common import read_json, write_json, sha, now, git_head
 
 def main():
@@ -24,8 +27,13 @@ def main():
     hf = read_json('evidencias/huggingface.json') if Path('evidencias/huggingface.json').exists() else {}
     github = read_json('evidencias/github.json') if Path('evidencias/github.json').exists() else {}
     styles = getSampleStyleSheet()
-    styles['BodyText'].fontSize = 9
-    styles['BodyText'].leading = 12
+    fonts = Path(reportlab.__file__).parent / 'fonts'
+    pdfmetrics.registerFont(TTFont('VeraEmbedded',str(fonts / 'Vera.ttf')))
+    pdfmetrics.registerFont(TTFont('VeraEmbeddedBold',str(fonts / 'VeraBd.ttf')))
+    for name in styles.byName:
+        styles[name].fontName = 'VeraEmbeddedBold' if name.startswith('Heading') or name == 'Title' else 'VeraEmbedded'
+    styles['BodyText'].fontSize = 9.5
+    styles['BodyText'].leading = 13
     styles['BodyText'].spaceAfter = 7
     story = []
     def p(text, style='BodyText'):
@@ -96,7 +104,7 @@ def main():
     p('Fuentes: PDF del profesor (16-10-2026); research.unsw.edu.au/projects/unsw-nb15-dataset; mirror Nir-J/ML-Projects commit 44bbd02b9e70f74dd915218d5eb702f125341ffc; git-scm.com/doc; doc.dvc.org/start; mlflow.org/docs/latest/ml/tracking; huggingface.co/docs/huggingface_hub/guides/download; scikit-learn.org/stable/common_pitfalls.html.')
     doc=SimpleDocTemplate(str(root / 'informe.pdf'),pagesize=A4,rightMargin=50,leftMargin=50,topMargin=38,bottomMargin=38)
     def footer(canvas, document):
-        canvas.setFont('Helvetica',8)
+        canvas.setFont('VeraEmbedded',8)
         canvas.drawString(50,23,f'Defiende el servidor · Evidencia real · Página {document.page}')
     doc.build(story,onFirstPage=footer,onLaterPages=footer)
     pages=len(PdfReader(root / 'informe.pdf').pages)

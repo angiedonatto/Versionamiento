@@ -4,7 +4,7 @@
 - Grupo de cada integrante: **[A/B POR COMPLETAR]**.
 - Contribución humana: **[CADA INTEGRANTE DEBE DECLARAR Y COMPRENDER SU APORTE]**.
 - GitHub solicitado: https://github.com/angiedonatto/Versionamiento
-- Revisión base del paquete: `f512264470fe858577e3824ed41e247d5cacf328`. El commit final de empaquetado se registra en `revision-entrega.txt` junto al ZIP y en el historial Git; no se inventa una autorreferencia de commit.
+- Revisión base del paquete: `c2be4f43732558918afdda9f89bd5a91193b1cee`. El commit final de empaquetado se registra en `revision-entrega.txt` junto al ZIP y en el historial Git; no se inventa una autorreferencia de commit.
 - Publicación GitHub/acceso docente: BLOQUEADO/NO COMPROBADO; API devuelve Forbidden, no se pudo verificar privacidad. No se subieron datos ni código a un repo cuya privacidad no está comprobada.
 - Historial sin dependencia de GitHub: `historial.bundle` dentro del ZIP; `git clone historial.bundle proyecto`.
 
@@ -44,6 +44,7 @@
 - `evidencias/seleccion.json`: decisión de validation fechada, incluida en tag v2 antes de test; no se modifica después de test.
 - `evidencias/metricas-test.json`, `predicciones-test.csv`, `recalculo-test.json`: test completo y comprobación por CSV.
 - `evidencias/recuperacion/`: muestra fija de 64 filas, salidas antes/después (estas últimas sólo si HF funciona), hashes, log y resultado real.
+- `comprobacion-local-suplementaria.json` y `local-suplementaria-limpia.log`: prueba adicional exitosa de ambas versiones desde Git local en checkout/venv nuevos; no sustituye HF. Los archivos `v*-local-despues.csv` se distinguen de las salidas HF.
 - `evidencias/verificacion-final.json`: distingue verificado de pendiente/bloqueado.
 - `README.md`: comandos exactos para instalación, DVC pull, reproducir un experimento, descargar por SHA y predecir.
 - `proyecto.zip`: código, evidencias y bundle Git; sin CSV masivos, entornos ni cachés.

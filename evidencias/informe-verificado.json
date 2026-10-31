@@ -1,7 +1,7 @@
 {
   "pages": 4,
-  "sha256": "519fda75776ac72598d3e6b4828d948227ae80e03fed1d5684526819a4731c7f",
-  "generated_at_utc": "2026-10-31T01:24:06.087149+00:00",
+  "sha256": "4b4e9f213e399aa70b4898b341beefa977f1af1cbc0da6c9e64cca5c0824cc00",
+  "generated_at_utc": "2026-10-31T01:25:34.134837+00:00",
   "numeric_sources": [
     "auditoria.json",
     "experimentos.csv",
@@ -9,5 +9,13 @@
     "metricas-test.json",
     "recuperacion/resultado.json"
   ],
-  "method": "Cifras renderizadas directamente desde JSON/CSV; páginas comprobadas con pypdf."
+  "method": "Cifras renderizadas directamente desde JSON/CSV; páginas comprobadas con pypdf.",
+  "visual_review": {
+    "reviewed_at_utc": "2026-10-31T01:26:00.397216+00:00",
+    "pages_inspected": [
+      1,
+      4
+    ],
+    "result": "legible; fuentes TTF incrustadas, tablas y texto dentro de margenes"
+  }
 }
