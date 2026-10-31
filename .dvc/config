@@ -1,0 +1,5 @@
+[core]
+    analytics = false
+    remote = entrega
+['remote "entrega"']
+    url = ../../dvc-storage

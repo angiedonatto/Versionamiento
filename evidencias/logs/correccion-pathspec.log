@@ -1,0 +1,12 @@
+Collecting pathspec==0.12.1
+  Downloading pathspec-0.12.1-py3-none-any.whl.metadata (21 kB)
+Downloading pathspec-0.12.1-py3-none-any.whl (31 kB)
+Installing collected packages: pathspec
+  Attempting uninstall: pathspec
+    Found existing installation: pathspec 1.1.1
+    Uninstalling pathspec-1.1.1:
+      Successfully uninstalled pathspec-1.1.1
+Successfully installed pathspec-0.12.1
+
+[notice] A new release of pip is available: 25.0.1 -> 26.2.2
+[notice] To update, run: python3 -m pip install --upgrade pip

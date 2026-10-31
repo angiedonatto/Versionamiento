@@ -1,0 +1,2 @@
+# Datos versionados explícitamente con data/raw.dvc y data/processed.dvc.
+__pycache__

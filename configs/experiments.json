@@ -1,0 +1,13 @@
+{
+  "seed": 20261016,
+  "validation_fraction": 0.2,
+  "positive_class": 1,
+  "threshold_rule": "score_attack >= threshold",
+  "selection_rule": "Maximizar macro-F1 en validation entre modelos no baseline y umbrales 0.10..0.90 cada 0.05 con recall >= 0.90; si ninguno cumple, maximizar macro-F1 sin restriccion. Desempate: menor FPR, mayor threshold, id lexicografico.",
+  "experiments": [
+    {"id":"lr_c01", "family":"LogisticRegression", "params":{"C":0.1,"max_iter":1000,"solver":"liblinear"}, "hypothesis":"Una frontera lineal regularizada ofrece una referencia interpretable y barata.", "change":"baseline v1"},
+    {"id":"lr_c10", "family":"LogisticRegression", "params":{"C":10.0,"max_iter":1000,"solver":"liblinear"}, "hypothesis":"Menor regularizacion permite mejorar macro-F1, a costa de estabilidad y tiempo.", "change":"C pasa de 0.1 a 10"},
+    {"id":"tree_d08", "family":"DecisionTreeClassifier", "params":{"max_depth":8,"min_samples_leaf":20}, "hypothesis":"Interacciones no lineales mejoran deteccion respecto de una frontera lineal.", "change":"arbol limitado a profundidad 8 y hojas >=20"},
+    {"id":"tree_d16", "family":"DecisionTreeClassifier", "params":{"max_depth":16,"min_samples_leaf":5}, "hypothesis":"Mayor profundidad captura patrones de ataque raros; puede elevar falsos positivos.", "change":"profundidad 16 y hojas >=5"}
+  ]
+}

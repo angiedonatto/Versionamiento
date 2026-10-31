@@ -1,0 +1,363 @@
+Defiende el servidor
+Taller evaluable · Versionado de código, datos, experimentos y
+modelos
+
+
+DOCUMENTO                               CURSO                                 FECHA                              USO
+
+Material académico                      MLOps · 2026-II                       16 de octubre de 2026              Uso académico
+
+
+
+
+INSTITUCIÓN                                     UNIDAD ACADÉMICA                                DOCENTE
+
+Universidad Externado de Colombia               Departamento de Matemáticas                     Julián Zuluaga · Docente
+
+
+
+
+    El reto: construir, versionar y recuperar
+    Un equipo de seguridad necesita distinguir conexiones normales de posibles ataques. Construye una
+    solución de machine learning y demuestra que puedes identificar, comparar y recuperar sus versiones.
+    El propósito principal es aprender a versionar código, datos, experimentos y modelos. La calidad de las
+    decisiones y su trazabilidad pesan más que obtener una métrica alta.
+
+
+
+MLOps · Visualización 2 · 2026-II · Grupos A y B
+
+Condiciones del trabajo
+  • Duración: dos semanas. Entrega hasta el viernes 30 de octubre de 2026 a las 11:59 p. m., hora de Bogotá.
+  • Modalidad: individual o en pareja, máximo dos integrantes. Una entrega por equipo; identificar el grupo de
+    clase de cada integrante.
+  • Entrega: responder al hilo del taller en Teams o enviar un correo al docente por el canal institucional habitual.
+    Elegir un solo canal; no se crea una tarea de Teams.
+  • Alcance obligatorio: clasificación binaria normal/ataque con UNSW-NB15; cuatro configuraciones de dos
+    familias de modelos; dos versiones recuperables de la solución.
+  • Herramientas obligatorias: Git/GitHub, DVC, MLflow y Hugging Face Hub. Python y scikit-learn para
+    implementar. Prefect es opcional y no agrega puntos.
+
+Pregunta central: si pierdes tu carpeta de trabajo, ¿puedes recuperar una versión concreta, explicar de qué datos y
+experimento viene y usarla para predecir?
+
+
+
+
+UNIVERSIDAD EXTERNADO DE COLOMBIA · DEPARTAMENTO DE MATEMÁTICAS                                                            USO ACADÉMICO · 1 / 8
+Datos y comparación justa
+Qué datos utilizar
+Usa las particiones publicadas UNSW_NB15_training-set.csv (175.341 filas) y UNSW_NB15_testing-set.csv
+(82.332 filas). No necesitas los archivos de captura PCAP ni el conjunto original completo. Consulta origen, variables
+y condiciones de uso en la fuente de UNSW.
+El objetivo es label : 0 = normal, 1 = ataque. Excluye label , attack_cat e id de las entradas del modelo.
+ attack_cat revela la respuesta y id identifica filas; conserva identificadores únicamente para auditoría y para
+relacionar predicciones.
+
+Auditoría y particiones
+ 1. Registra fuente, fecha de descarga, SHA-256, filas, columnas, clases, faltantes y tipos de cada archivo.
+    Comprueba contenido y tamaños: el nombre del archivo por sí solo no garantiza que sea la partición correcta.
+ 2. Cuenta duplicados por las variables predictoras, sin identificadores ni etiquetas. Detecta también grupos de
+    entradas iguales con etiquetas contradictorias y documenta tu política.
+ 3. Crea entrenamiento y validación solo a partir del archivo de entrenamiento. Los grupos de entradas idénticas
+    no pueden quedar repartidos entre ambos. Conserva una semilla y una asignación de filas reproducibles.
+ 4. Mantén fijas estas particiones para los cuatro experimentos. Ajusta codificadores, imputación, escalado y
+    selección de variables solo con entrenamiento. Agrupa preprocesamiento y estimador en una solución que
+    pueda guardarse y cargarse completa.
+ 5. Reserva el archivo de test para evaluar la versión final. Puedes auditar su esquema, duplicados y cruces de
+    entradas; no uses sus etiquetas ni métricas para elegir modelos o umbrales. Reporta cuánto se solapa con
+    entrenamiento/validación y limita tus conclusiones.
+
+Dos versiones de datos: conserva con DVC una versión de los archivos recibidos y otra de los datos preparados y
+sus particiones. Documenta la transformación; no hace falta recolectar datos nuevos ni cambiar los splits entre
+experimentos.
+
+Descarga y límites
+La página oficial es la referencia de atribución. Como alternativa de acceso, se ofrecen enlaces a una copia fijada de
+las particiones de entrenamiento y test. Es un mirror de terceros; verifica las huellas del anexo. Si falla el acceso,
+avisa antes del cierre.
+Puedes usar CPU y una muestra reproducible de entrenamiento si justificas el tamaño y mantienes iguales los
+datos de comparación. El test final debe cubrir toda la partición publicada; no elimines sus filas para mejorar las
+métricas. Este dataset histórico no demuestra eficacia sobre una red actual.
+
+
+
+
+UNIVERSIDAD EXTERNADO DE COLOMBIA · DEPARTAMENTO DE MATEMÁTICAS                                       USO ACADÉMICO · 2 / 8
+Experimentos y versiones del modelo
+Cuatro configuraciones, dos familias
+Comienza con una referencia sencilla. Entrena al menos cuatro configuraciones en total, repartidas entre al menos
+dos familias; por ejemplo, regresión logística y árboles. Cambiar la semilla cuatro veces no equivale a cuatro
+configuraciones. No se requieren redes neuronales ni GPU.
+Para cada ejecución escribe una hipótesis, identifica el cambio y registra en MLflow: parámetros, semilla, versión
+de datos, commit del código, métricas de validación y artefacto del modelo completo. Conserva los run ID y exporta
+una tabla de comparación. El seguimiento puede ser local; no necesitas un servidor público ni Model Registry
+adicional.
+Usa recall de ataque, precision de ataque, tasa de falsos positivos, macro-F1 y matriz de confusión. Define ataque
+como clase positiva. Reporta cómo manejas denominadores cero. La accuracy puede complementar, pero no
+sustituye este análisis.
+
+Dos versiones que tengan una razón de existir
+  • v1: una primera solución funcional, con preprocesamiento, modelo, umbral y métricas de validación
+    identificados.
+  • v2: una revisión basada en los experimentos, con un cambio explicado: modelo, hiperparámetros,
+    preprocesamiento o umbral. Debe poder distinguirse de v1; renombrar el mismo archivo no constituye otra
+    versión.
+
+La segunda versión no tiene que mejorar todas las métricas. Explica qué mejora, qué empeora y qué errores
+aceptas. Publica ambas en un repositorio de modelos de Hugging Face Hub, identificadas con revisiones
+inmutables (commit SHA completo); puedes añadir tags v1 y v2 para facilitar la lectura.
+Cada revisión debe contener el modelo completo, configuración y umbral, dependencias y una model card:
+propósito, datos, métricas de validación, limitaciones, instrucciones de uso y referencias al commit de código,
+versión DVC y run de MLflow.
+
+Selección y evaluación final
+Elige el modelo y el umbral de v2 usando exclusivamente validación. Guarda la decisión antes de evaluar test y no
+la ajustes después. Evalúa una vez la solución congelada sobre test; entrega predicciones por fila y métricas
+recalculables. Si el resultado empeora, explícalo y consérvalo.
+No necesitas evaluar v1 en test. La comparación v1/v2 se hace con validación. Al añadir el resultado final a la model
+card, conserva el SHA de la revisión evaluada y el hash del artefacto: actualizar documentación no debe cambiar el
+modelo congelado.
+
+
+
+
+UNIVERSIDAD EXTERNADO DE COLOMBIA · DEPARTAMENTO DE MATEMÁTICAS                                      USO ACADÉMICO · 3 / 8
+Qué versiona cada herramienta
+ Herramienta                                Responsabilidad y evidencia obligatoria
+
+ Git + GitHub                               Código, configuraciones, documentación y referencias DVC. Historial con cambios explicados y dos
+                                            commits o tags que identifiquen las soluciones v1/v2. El ZIP por sí solo no demuestra el historial.
+
+ DVC                                        Datos originales y preparados. Archivos de seguimiento, referencias Git de ambas versiones y
+                                            almacenamiento del que puedan recuperarse sin la caché original. No basta con ejecutar dvc
+                                            add .
+
+ MLflow                                     Cuatro ejecuciones identificables: hipótesis, parámetros, métricas y modelos. Exportación
+                                            consultable de los registros, no solo capturas.
+
+ Hugging Face Hub                           Dos revisiones del modelo completo, descargables por SHA, con model card y relación con los
+                                            experimentos. Subir archivos sin probar su recuperación es insuficiente.
+
+
+
+   Código: commit Git → Datos: referencia DVC → Experimento: run ID → Modelo: revisión de Hugging Face
+
+
+Prueba obligatoria de recuperación
+Haz la prueba en una carpeta y un entorno nuevos, sin reutilizar las cachés de datos/modelos de la ejecución
+original. Puede ser en el mismo computador. Documenta los comandos reales y conserva el registro de salida.
+ 1. Obtén la revisión de código elegida e instala las dependencias fijadas.
+ 2. Recupera con DVC los datos originales y preparados desde el almacenamiento entregado; verifica sus huellas.
+    Un remote ubicado únicamente en tu computador no sirve para la revisión del docente.
+ 3. Descarga desde Hugging Face la revisión v1, indicando su SHA completo, y carga preprocesamiento, modelo y
+    umbral.
+ 4. Predice sobre una muestra fija de validación, al menos 20 filas. Descarga v2 por su SHA y repite con las mismas
+    filas. Guarda ambas salidas; no es obligatorio que sus etiquetas sean distintas.
+ 5. Comprueba que las predicciones recuperadas coinciden con las guardadas para cada versión. Si comparas
+    probabilidades, declara una tolerancia numérica razonable y registra la diferencia máxima.
+
+Incluye entrada, salidas, hashes y log. No hace falta reentrenar todo para demostrar la recuperación; sí debes
+entregar código e instrucciones para reproducir un experimento.
+Acceso: repositorios públicos o privados con acceso de lectura para el docente. No es obligatorio publicar en
+abierto. Usa los mecanismos de invitación de cada plataforma; nunca compartas tokens. Si no conoces el usuario
+del docente, solicítalo por el mismo canal antes del cierre.
+
+
+
+
+UNIVERSIDAD EXTERNADO DE COLOMBIA · DEPARTAMENTO DE MATEMÁTICAS                                                                USO ACADÉMICO · 4 / 8
+Una sola entrega
+Responde al hilo del taller en Teams o envía correo al docente por el canal institucional habitual. Incluye un ZIP del
+proyecto, un informe PDF y los enlaces de revisión. Si los adjuntos superan el límite del canal, comparte una
+carpeta descargable con esos mismos archivos y acceso de lectura.
+Asunto o primera línea: MLOps — Defiende el servidor — Grupo A/B — Integrantes .
+En el mensaje indica nombres completos, grupo, URL del repositorio de código, commit final completo, URL del
+repositorio de modelos y SHA de v1 y v2. Incluye ubicación y forma de acceso al almacenamiento DVC. No hace
+falta enviar por ambos canales.
+
+Dentro del ZIP
+
+  proyecto/
+    README.md
+    entrega.md
+    requirements.txt o lockfile equivalente
+    src/ y configs/
+    .dvc/config, archivos .dvc y .dvcignore
+    evidencias/
+      auditoria.json
+      experimentos.csv
+      seleccion.json
+      metricas-test.json
+      predicciones-test.csv
+      mlflow/
+      recuperacion/
+
+
+Se aceptan nombres equivalentes si entrega.md identifica dónde está cada evidencia. dvc.yaml y dvc.lock
+se incluyen si se usa un pipeline DVC; no son obligatorios para versionar archivos con .dvc . MLflow puede
+entregarse como exportación estructurada con artefactos relevantes y pasos de consulta.
+No incluyas entornos virtuales, cachés, credenciales ni copias masivas del dataset dentro del ZIP. Los datos se
+recuperan mediante DVC y los modelos desde Hugging Face. Si entregas un archivo de almacenamiento DVC como
+respaldo, sepáralo del ZIP de código y explica cómo usarlo como remote.
+
+Informe y README
+El informe, máximo cinco páginas —referencias aparte— debe explicar: datos y limpieza, cuatro experimentos,
+cambios entre v1/v2, elección de umbral, test final y limitaciones. Usa tablas y cifras consistentes con tus archivos
+de evidencia.
+El README debe indicar versión de Python, dependencias fijadas, instalación, recuperación de datos, ejecución de
+un experimento, descarga de cada modelo y predicción. Proporciona comandos que otra persona pueda copiar y
+ejecutar desde el repositorio, sin editar rutas personales.
+No se exige video, aplicación web, API, Space, servicio de pago ni servidor encendido. No hay avances obligatorios.
+Conserva la versión entregada; si debes corregirla, identifica la nueva revisión y explica el cambio al docente.
+
+
+
+
+UNIVERSIDAD EXTERNADO DE COLOMBIA · DEPARTAMENTO DE MATEMÁTICAS                                       USO ACADÉMICO · 5 / 8
+Evidencias que permiten revisar
+Los siguientes son contratos mínimos de contenido. Usa CSV y JSON válidos, sin celdas combinadas ni números
+guardados como imágenes. Los nombres de campos pueden variar si están explicados. Las capturas son apoyo; no
+reemplazan datos, código ni registros.
+
+ Archivo o carpeta                          Qué debe permitir comprobar
+
+ auditoria.json                             Fuentes y SHA-256; filas/columnas; clases y faltantes; duplicados por entradas; contradicciones;
+                                            política de limpieza; variables usadas/excluidas; semilla, tamaños y huellas de splits; cruces entre
+                                            particiones.
+
+ experimentos.csv                           Una fila por configuración: ID, hipótesis, familia, parámetros o ruta, semilla, commit Git, referencia
+                                            DVC, run ID, recall, precision, FPR, macro-F1 y conclusión de validación. Registrar también el umbral
+                                            usado.
+
+ seleccion.json                             Versión elegida, run ID, referencias Git/DVC/Hugging Face, hash del modelo, umbral, razón de
+                                            selección y evidencia de congelación anterior al test (commit o registro fechado).
+
+ metricas-test.json                         Versión y hash del modelo evaluado, hash del dataset, filas evaluadas, umbral, definición de clase
+                                            positiva, matriz de confusión y métricas.
+
+ predicciones-test.csv                      Una fila por registro original: row_id , y_true , score_attack y y_pred .
+                                             row_id debe identificar inequívocamente archivo/fila; score es la probabilidad o puntuación de
+                                            ataque. Explica la regla que aplica el umbral.
+
+ mlflow/                                    Registros exportados de los cuatro run ID, parámetros, métricas, metadatos y artefactos relevantes.
+                                            Debe ser posible cruzarlos con la tabla sin depender del servidor de tu computador.
+
+ recuperacion/                              Al menos 20 entradas fijas de validación; salidas de v1/v2 antes y después de recuperar; hashes;
+                                            comandos, log, comparación y resultado de la prueba en entorno nuevo.
+
+
+Índice de la entrega: entrega.md
+Copia estos campos y complétalos como una lista sencilla:
+  • Integrantes y grupo; URL GitHub y commit final de la entrega.
+  • Para cada versión v1/v2: commit del código que la produjo, referencia de datos DVC, run ID de MLflow,
+    repositorio y SHA de Hugging Face, hash del modelo y umbral.
+  • Ubicación de cada evidencia y del almacenamiento DVC; instrucciones de acceso.
+  • Comandos de instalación, recuperación, entrenamiento y predicción; tiempo y recursos medidos en tu equipo.
+  • Limitaciones conocidas y declaración del uso de IA, código externo y contribución de cada integrante.
+
+Coherencia obligatoria: el modelo que describes, el que descargas y el que produce las predicciones debe ser el
+mismo artefacto. Vincula cada pieza por identificadores y hashes, no solo por nombres como “modelo_final”.
+
+
+
+
+UNIVERSIDAD EXTERNADO DE COLOMBIA · DEPARTAMENTO DE MATEMÁTICAS                                                                  USO ACADÉMICO · 6 / 8
+Rúbrica de calificación
+Total: 100 puntos. Nota del taller = puntos obtenidos ÷ 20, sobre 5,00. Esta rúbrica evalúa el taller; su peso
+dentro de la nota del curso se comunica por separado. No hay puntos adicionales por extensiones opcionales.
+
+ Criterio                                   Puntos y comprobaciones
+
+ Código con Git · 15                        Historial y cambios explicados 5; revisiones de código v1/v2 recuperables 5; configuración y
+                                            dependencias identificadas, sin secretos 5.
+
+ Datos con DVC · 20                         Auditoría, particiones y prevención de fuga 8; versiones original/preparada y referencias 6;
+                                            recuperación desde almacenamiento entregado, con huellas coincidentes 6.
+
+ Experimentos con MLflow · 20               Cuatro configuraciones de dos familias, con hipótesis y comparación justa 8; registros exportados y
+                                            trazables 8; interpretación de errores y elección de umbral con validación 4.
+
+ Modelos en Hugging Face · 20               Dos versiones completas y diferentes, identificadas por SHA 8; model cards con métricas, límites y
+                                            uso 6; vínculo de cada versión con Git, DVC y MLflow 6.
+
+ Recuperación y evaluación · 15             Entorno nuevo, descarga y coincidencia de predicciones de ambas versiones 8; test final reservado,
+                                            predicciones completas y métricas recalculables 7.
+
+ Explicación y entrega · 10                 Informe coherente, decisiones y limitaciones 6; README, índice de evidencias y declaración de
+                                            contribuciones/ayudas 4.
+
+
+Cómo se asignan los puntos
+Cada componente en negrita se valora por separado con el mismo criterio:
+
+ Nivel                                                       Porcentaje del componente          Evidencia
+
+ Completo                                                                              100%     Suficiente, coherente y verificable; cumple lo
+                                                                                                pedido.
+
+ Parcial                                                                                50%     Una parte sustancial funciona, pero falta un
+                                                                                                requisito o la comprobación queda incompleta.
+
+ Ausente o no demostrado                                                                 0%     No se entrega, es incorrecto o solo se declara
+                                                                                                sin evidencia comprobable.
+
+Se suman los componentes y se redondea la nota a dos decimales. No se exige un mínimo de accuracy ni mejorar
+todas las métricas: una decisión bien sustentada puede obtener la máxima puntuación.
+
+Errores metodológicos y verificación
+Usar la respuesta como entrada, ajustar transformaciones con validación/test o repartir duplicados entre
+entrenamiento y validación invalida la comparación afectada. Usar test para elegir modelo/umbral invalida su
+carácter de evaluación final. Se puntúan los componentes que sí se demuestren; no se anula automáticamente
+todo el trabajo.
+La revisión incluye archivos, historial, recalcular métricas y ejecutar recuperación/predicción en un entorno
+separado. Una diferencia del entorno se distingue de un defecto de la entrega. Se pueden solicitar aclaraciones o
+una demostración breve a cualquier integrante. La calificación final corresponde al docente.
+
+
+
+
+UNIVERSIDAD EXTERNADO DE COLOMBIA · DEPARTAMENTO DE MATEMÁTICAS                                                                 USO ACADÉMICO · 7 / 8
+Plan de dos semanas y revisión final
+Ruta sugerida, sin entregas intermedias
+Semana 1 — Datos, experimentos y primera versión. Revisa documentación; crea el repositorio; audita y
+versiona datos originales/preparados con DVC; define splits; entrena la referencia y registra las ejecuciones en
+MLflow. Conserva la solución v1 y avanza la comparación de cuatro configuraciones.
+Semana 2 — Segunda versión, recuperación y entrega. Completa la comparación; elige modelo y umbral con
+validación; publica v1/v2 en Hugging Face con sus model cards y congela la selección. Haz la prueba de
+recuperación en entorno nuevo; evalúa una vez en test; recalcula métricas, redacta el informe y verifica accesos
+antes de entregar.
+
+Lista de comprobación antes de enviar
+  • Puedo explicar qué cambió entre v1 y v2 y recuperar el código de ambas.
+  • DVC conserva datos originales/preparados y permite recuperarlos sin mi caché.
+  • Las cuatro configuraciones usan la misma partición y tienen run ID consultable.
+  • Hugging Face contiene ambas soluciones completas, con SHA y model card.
+  • La recuperación usa las mismas entradas y reproduce las salidas de cada versión.
+  • El test no decidió el modelo; sus predicciones y métricas coinciden.
+  • El ZIP, el informe y los enlaces permiten seguir el README desde cero.
+  • Comprobé el acceso del docente; no incluí tokens, contraseñas ni datos personales innecesarios.
+
+Trabajo propio y ayuda
+Puedes consultar documentación y usar asistentes de IA. Declara qué herramientas utilizaste, para qué y qué
+verificaste. Cita código adaptado y sus licencias. Cada integrante debe comprender y explicar su contribución y las
+decisiones del proyecto. No se entregan soluciones docentes como trabajo propio.
+
+Fuentes para investigar y verificar
+Git · DVC · MLflow Tracking · Hugging Face: descarga por revisión · Model cards · scikit-learn: errores comunes.
+Huellas de la copia de descarga alternativa: SHA-256 de los CSV sin comprimir. Procedencia mirror; no
+constituyen autenticación contra el archivo oficial.
+
+  UNSW_NB15_training-set.csv
+  bec7dd5ec88dc2a0ccc7a07879d338395ed7421750f675fd0339e07dfe0648fa
+  UNSW_NB15_testing-set.csv
+  734fe6642edf758f7c94d7d9149426b49d202fe8e7bf0bef47392489c3c0a559
+
+
+Una buena entrega permite reconstruir la historia del modelo y recuperar sus versiones.
+
+
+
+
+UNIVERSIDAD EXTERNADO DE COLOMBIA · DEPARTAMENTO DE MATEMÁTICAS                                        USO ACADÉMICO · 8 / 8
+
