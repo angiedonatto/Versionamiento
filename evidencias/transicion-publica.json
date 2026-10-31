@@ -1,0 +1,8 @@
+{
+  "recorded_at_utc": "2026-10-31T04:34:01.337477+00:00",
+  "authorized_by_user": true,
+  "group": "B",
+  "change": "Autorizar lecturas públicas sin token y adaptar las comprobaciones de acceso; sin cambiar modelos, umbrales ni test.",
+  "frozen_artifacts_unchanged": true,
+  "previous_recovery_preserved": "evidencias/recuperacion/historico/antes-publico/"
+}

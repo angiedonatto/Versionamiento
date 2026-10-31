@@ -77,6 +77,8 @@ def main():
     remote_verified=publication.get('passed',False) and publication.get('git_commit')==final_commit
     downloads=publication.get('assets_downloads_verified',{})
     assets_verified=all(downloads.get(n,{}).get('sha256')==artifact_checks[n].get('sha256') and downloads.get(n,{}).get('passed') for n in ['proyecto.zip','informe.pdf','dvc-storage.zip'])
+    public_checks=publication.get('public_read_checks',{})
+    public_reviewer_access=all(public_checks.get(k,False) for k in ['github_code','hf_models','hf_artifacts'])
     def item(number,text,passed,evidence,pending=None):
         return {'number':number,'requirement':text,'status':'verificado' if passed else 'pendiente / parcial','evidence':evidence,'pending':pending}
     items=[
@@ -87,7 +89,7 @@ def main():
         item(5,'Recuperación sobre mismas entradas reproduce ambas versiones',comparison['rows']==64 and all(v['classes_exact'] and v['max_score_difference']<=1e-12 for v in comparison['versions'].values()),'64 row_id fijos; clases exactas y diferencia máxima de scores 0 para v1/v2'),
         item(6,'Test no decide solución; predicciones y métricas coinciden',unchanged and original['rows']==82332 and verification['checks']['test_82332_and_recalculation'],'Selección pretest, invariantes contra commit original, CSV completo y recálculo sin reevaluar modelo'),
         item(7,'ZIP, informe, enlaces y README permiten reconstruir',zip_valid and pdf_valid and remote_verified and assets_verified,'ZIP íntegro, PDF <=5 páginas y descargas inmutables de entregables con huellas coincidentes','Resolver publicación/descarga de artefactos si aún no consta' if not assets_verified else None),
-        item(8,'Acceso del docente y ausencia de credenciales/datos personales innecesarios',False,'Repositorios privados; token usado sólo mediante entorno seguro; escaneo del ZIP: '+str(credential_scan),'Falta comprobar acceso de la cuenta del profesor a GitHub/release y HF privado. No se dispone de sus usuarios; no se inventan invitaciones.')]
+        item(8,'Acceso del docente y ausencia de credenciales/datos personales innecesarios',public_reviewer_access and credential_scan,'Lectura pública sin token de GitHub, modelos HF y archivos; escaneo del ZIP: '+str(credential_scan),None if public_reviewer_access else 'Falta completar pruebas de lectura pública; no se inventan invitaciones ni inicios de sesión con cuentas del docente.')]
     blocks=[]
     for name in dict.fromkeys(r['block'] for r in rubric):
         rows=[r for r in rubric if r['block']==name]
@@ -97,7 +99,7 @@ def main():
             'conditional_potential_points_not_grade':sum(r['conditional_potential_points'] for r in rubric),
             'score_caveat':'Estimación de cobertura, NO calificación. Supeditada a acceso efectivo del docente y su revisión. La integrante y su contribución individual están declaradas; el grupo B fue confirmado expresamente por la estudiante.',
             'technical_checks_passed':verification['all_required_passed'] and zip_valid and pdf_valid and credential_scan and assets_verified and remote_verified,
-            'teacher_access_verified':False,'human_identity_and_contribution_complete':people_complete,
+            'teacher_access_verified':False,'reviewer_read_access_via_public_endpoints_verified':public_reviewer_access,'human_identity_and_contribution_complete':people_complete,
             'artifacts':artifact_checks,'publication_evidence':'verificacion-publicacion.json',
             'preserved_test_evaluated_at':original['evaluated_at_utc'],'frozen_artifacts_unchanged':unchanged,
             'sources':['docs/requisitos-profesor.txt (lista final p.8, rúbrica p.7)','evidencias/verificacion-final.json','evidencias/trazabilidad-final.json','evidencias/recuperacion/resultado.json','verificacion-publicacion.json']}
@@ -109,9 +111,9 @@ def main():
     text+=f'\nPotencial condicionado estimado: **{result["conditional_potential_points_not_grade"]:g}/100**. {result["score_caveat"]}\n\n'
     text+='### Componentes individuales\n\n'
     for r in rubric: text+=f'- **{r["block"]} — {r["component"]} ({r["max_points"]} pts):** {r["status"]}. {r["evidence"]}.\n'
-    distribution_note=('Se utilizó un repositorio HF privado separado para distribuirlos, con descargas verificadas por SHA.' if assets_verified else 'El destino HF privado está preparado, pero la carga de archivos fue bloqueada por revisión automática y requiere autorización explícita. No se afirma publicación ni descarga de esos archivos.')
+    distribution_note=('Se utilizó el repositorio HF público expresamente autorizado, con descargas sin token verificadas por SHA.' if assets_verified else 'La distribución aún no se considera verificada; consultar el estado y los bloqueos en verificacion-publicacion.json.')
     text+=f'\n## Integridad y cronología\n\nNo hubo reentrenamiento, cambio de umbral ni nueva evaluación test. Evaluación original conservada: {original["evaluated_at_utc"]}. La publicación HF fue posterior; trazabilidad-final.json vincula el mismo hash del artefacto con sus SHA HF, sin modificar registros históricos.\n\nPDF: {pages} páginas; ZIP sin datos masivos ni cachés; escaneo de patrones de credenciales aprobado: {credential_scan}. Las descargas inmutables de entregables coinciden con los tres archivos locales: {assets_verified}. GitHub rechazó adjuntos binarios con HTTP 401 en uploads.github.com. {distribution_note}\n\n'
-    text+='## Datos académicos y acceso\n\nAngie Valentina Donato Pita, única integrante; contribución estudiantil íntegramente suya, con asistencia de Codex declarada. Grupo B confirmado; horario de 4:00 a 6:00 p. m. Comprobar lectura del profesor en GitHub/release y ambos repositorios HF privados. No compartir tokens ni declarar invitaciones enviadas sin evidencia. No se afirma envío al docente.\n'
+    text+='## Datos académicos y acceso\n\nAngie Valentina Donato Pita, única integrante; contribución estudiantil íntegramente suya, con asistencia de Codex declarada. Grupo B confirmado; horario de 4:00 a 6:00 p. m. Visibilidad pública autorizada: se verifican endpoints sin token, no una sesión de la cuenta del profesor. No compartir credenciales ni inventar invitaciones. No se afirma envío al docente.\n'
     (out/'auditoria-cumplimiento.md').write_text(text)
     print(json.dumps({'technical_checks_passed':result['technical_checks_passed'],'guide_verified':sum(x['status']=='verificado' for x in items),'guide_pending':sum(x['status']!='verificado' for x in items),'conditional_points_not_grade':result['conditional_potential_points_not_grade']},indent=2))
 

@@ -2,11 +2,14 @@
   "repo_id": "angiedonatto/defiende-el-servidor-entregables",
   "repo_type": "dataset",
   "url": "https://huggingface.co/datasets/angiedonatto/defiende-el-servidor-entregables",
-  "private": true,
+  "private": false,
   "created_or_verified_at_utc": "2026-10-31T01:55:00.973143+00:00",
   "purpose": "ZIP de proyecto, PDF y respaldo DVC separados de los modelos congelados.",
   "github_assets_status": "El endpoint uploads.github.com devolvió HTTP 401 con las credenciales suministradas; API principal, Git push y clon funcionan. No se extraen credenciales ni se intenta eludir el proxy.",
   "authorized_by_user": true,
   "authorization_record": "evidencias/autorizacion-entregables.json",
-  "authorization_recorded_at_utc": "2026-10-31T02:01:48.404500+00:00"
+  "authorization_recorded_at_utc": "2026-10-31T02:01:48.404500+00:00",
+  "private_required": false,
+  "public_update_authorized_by_user": true,
+  "visibility_authorization": "configs/visibilidad.json"
 }

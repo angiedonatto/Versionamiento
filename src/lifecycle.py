@@ -137,9 +137,13 @@ def publish(repo):
     api = HfApi()
     if not repo:
         repo = api.whoami()['name'] + '/defiende-el-servidor'
-    info = api.create_repo(repo_id=repo, repo_type='model', private=True, exist_ok=True)
-    if not api.model_info(repo).private:
-        raise RuntimeError('El repositorio HF existente es público; no subir sin autorización.')
+    visibility=read_json('configs/visibilidad.json') if Path('configs/visibilidad.json').exists() else {}
+    expected_private=bool(visibility.get('hf_models_private',True))
+    if not expected_private and not visibility.get('authorized_by_user'):
+        raise RuntimeError('Publicación pública requiere autorización explícita.')
+    api.create_repo(repo_id=repo, repo_type='model', private=expected_private, exist_ok=True)
+    if bool(api.model_info(repo).private) != expected_private:
+        raise RuntimeError('La visibilidad real no coincide con la autorizada; no subir.')
     stage_versions()
     records = read_json('evidencias/huggingface.json') if Path('evidencias/huggingface.json').exists() else {}
     for version in ['v1', 'v2']:
@@ -149,7 +153,7 @@ def publish(repo):
         assert sha(f'models/{version}/pipeline.joblib') == cfg['model_sha256']
         commit = api.upload_folder(repo_id=repo, folder_path=f'models/{version}', commit_message=f'Publicar {version}: pipeline congelado y trazabilidad')
         records[version] = {'repo_id': repo, 'url': f'https://huggingface.co/{repo}', 'sha': commit.oid,
-                            'model_sha256': cfg['model_sha256'], 'published_at_utc': now(), 'private': True}
+                            'model_sha256': cfg['model_sha256'], 'published_at_utc': now(), 'private': expected_private}
         write_json('evidencias/huggingface.json', records)
         api.create_tag(repo, tag=version, revision=commit.oid, exist_ok=True)
     # Referencia suplementaria: no mutar el registro de selección congelado.

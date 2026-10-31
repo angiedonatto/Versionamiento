@@ -46,7 +46,7 @@ def main():
             'all_immutable_files_unchanged':True}
     write_json('evidencias/trazabilidad-final.json',record)
     state=read_json('evidencias/modelos/estado.json')
-    state.update({'status':'Publicados en HF privado y recuperados por SHA con coincidencia exacta en 64 filas.','hf_recovery_verified':True,'updated_at_utc':now()})
+    state.update({'status':'Publicados en HF con visibilidad autorizada y recuperados por SHA con coincidencia exacta en 64 filas.','hf_recovery_verified':True,'updated_at_utc':now()})
     write_json('evidencias/modelos/estado.json',state)
     print('Invariantes verificadas: selección, modelos y test intactos; dos descargas HF verificadas.')
 

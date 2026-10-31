@@ -40,10 +40,11 @@ def main():
     for version in ['v1','v2']:
         item = publications[version]
         assert len(item['sha']) == 40 and all(c in '0123456789abcdef' for c in item['sha'])
-        info = HfApi().model_info(item['repo_id'], revision=item['sha'])
-        assert info.sha == item['sha'] and info.private
+        expected_private = bool(item.get('private', True))
+        info = HfApi(token=False if not expected_private else None).model_info(item['repo_id'], revision=item['sha'])
+        assert info.sha == item['sha'] and bool(info.private) == expected_private
         # Caché HF vacía para este proceso, revisión SHA explícita. NO fallback local.
-        path = Path(snapshot_download(repo_id=item['repo_id'], revision=item['sha']))
+        path = Path(snapshot_download(repo_id=item['repo_id'], revision=item['sha'], token=False if not expected_private else None))
         assert sha(path / 'pipeline.joblib') == item['model_sha256']
         config = read_json(path / 'config.json')
         expected = read_json(f'evidencias/{version}.json')
@@ -61,6 +62,7 @@ def main():
         assert equal and maxdiff <= 1e-12
         result['versions'][version] = {'sha': item['sha'], 'model_sha256': sha(path / 'pipeline.joblib'),
                                      'downloaded_from_hf': True, 'private': bool(info.private),
+                                     'sdk_authentication_disabled': not expected_private,
                                      'snapshot_path': str(path), 'threshold': config['threshold'],
                                      'mlflow_run_id': config['mlflow_run_id'], 'git_commit': config['git_commit'],
                                      'files_sha256': {name: sha(path / name) for name in required},

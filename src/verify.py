@@ -62,7 +62,7 @@ def main():
         for version in ['v1','v2']:
             assert comparison['versions'][version]['sha']==pubs[version]['sha']
             assert comparison['versions'][version]['downloaded_from_hf']
-            assert comparison['versions'][version]['private']
+            assert comparison['versions'][version]['private'] == bool(pubs[version].get('private',True))
     anchors=read_json('evidencias/invariantes-finalizacion.json')
     for path, expected in anchors['immutable_files'].items():
         assert sha(path)==expected, path

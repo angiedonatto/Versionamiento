@@ -42,9 +42,9 @@ git show datos-preparados:data/processed.dvc
 
 El ZIP de proyecto incluye `historial.bundle` para conservar el historial aun
 si falla GitHub. Para restaurarlo: `git clone historial.bundle proyecto-git`.
-La comprobación del profesor requiere acceso de lectura al repositorio GitHub y
-al repositorio privado HF mediante los mecanismos propios de cada plataforma.
-Nunca se deben compartir tokens.
+La visibilidad pública de ambos repositorios HF fue autorizada por la estudiante.
+Se comprueba lectura sin token de los modelos y los entregables. Si GitHub sigue
+privado, el profesor necesitará acceso propio al código; nunca compartir tokens.
 
 ## Reproducir entrenamiento
 
@@ -76,12 +76,11 @@ análisis de otros umbrales está en `umbrales-validation.json`.
 
 ## Descargar modelos por SHA y predecir
 
-Ambas versiones están publicadas en el repositorio **privado**
+Ambas versiones están publicadas en el repositorio **público**
 https://huggingface.co/angiedonatto/defiende-el-servidor . Los SHA completos
 inmutables se conservan en `evidencias/huggingface.json`; `v1`/`v2` son tags auxiliares.
-Se requiere un `HF_TOKEN` propio con permiso de lectura. Configurarlo mediante
-secretos seguros del entorno o el inicio de sesión interactivo de Hugging Face;
-nunca incluirlo en comandos guardados, Git, ZIP o mensajes.
+La lectura pública no necesita `HF_TOKEN`. Las escrituras usan el secreto seguro
+del entorno; nunca incluirlo en comandos guardados, Git, ZIP o mensajes.
 
 ```bash
 python -m src.download_model --version v1 --output descargado-v1
@@ -92,7 +91,7 @@ python -m src.lifecycle predict --model-dir descargado-v2 \
 
 El script exige SHA completo registrado, verifica SHA256 del pipeline y no
 reemplaza una descarga fallida por un modelo local. Usar autenticación segura
-HF con permisos de lectura al repo privado. Sólo cargar joblib de confianza.
+para repositorios privados si se cambia su visibilidad. Sólo cargar joblib de confianza.
 
 ## Recuperación independiente y test reservado
 
@@ -141,7 +140,7 @@ después de la evaluación original y se verifica que el artefacto es el mismo.
 La auditoría definitiva de los ocho requisitos y los 100 puntos se entrega en
 `auditoria-cumplimiento.md` y `.json` junto al ZIP. La prueba de lectura del
 profesor y los datos personales se distinguen de las comprobaciones técnicas.
-El destino preparado para los archivos es un repositorio HF **de tipo dataset y privado**,
+El destino autorizado para los archivos es un repositorio HF **de tipo dataset y público**,
 separado del repositorio de modelos:
 https://huggingface.co/datasets/angiedonatto/defiende-el-servidor-entregables .
 Sólo se considera completada la distribución cuando la verificación final

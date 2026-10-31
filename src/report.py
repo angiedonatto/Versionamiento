@@ -96,7 +96,7 @@ def main():
     p('DVC conserva originales y preparados con referencias Git separadas. El respaldo dvc-storage.zip se entrega fuera del ZIP del proyecto y se puede extraer como remote. Se verifican SHA256 de los dos originales y de todos los preparados tras dvc pull con caché vacía.')
     if recovery:
         p(f'Recuperación real: carpeta nueva, venv nuevo, pip sin caché y cachés DVC/HF nuevas. Inicio {recovery["started_at_utc"]}; duración {recovery["elapsed_seconds"]:.3f} s. DVC pasó: {recovery.get("dvc_passed",False)}. Recuperación completa de ambas revisiones HF: {recovery.get("passed",False)}. Log: evidencias/recuperacion/recuperacion.log. ' + str(recovery.get('blocker','')))
-    p('Repositorio privado de modelos: https://huggingface.co/angiedonatto/defiende-el-servidor . Se guardaron 64 filas fijas de validation y salidas de referencia antes de recuperar. La descarga usa SHA HF completos y sólo los pipelines descargados; tolerancia de scores 1e-12.')
+    p('Repositorio público de modelos: https://huggingface.co/angiedonatto/defiende-el-servidor . Visibilidad pública autorizada por la estudiante. Se guardaron 64 filas fijas de validation y salidas de referencia antes de recuperar. Descarga por SHA HF completos; tolerancia de scores 1e-12.')
     local_path=Path('evidencias/recuperacion/comprobacion-local-suplementaria.json')
     if recovery.get('passed'):
         comparison=read_json('evidencias/recuperacion/comparacion.json')
@@ -105,8 +105,8 @@ def main():
         local=read_json(local_path)
         p(f'Comprobación suplementaria desde el checkout nuevo y venv nuevo (fuente Git local, NO HF): {local["rows"]} filas, clases idénticas en v1/v2; diferencias máximas de scores {local["versions"]["v1"]["max_score_difference"]} y {local["versions"]["v2"]["max_score_difference"]}. Log: local-suplementaria-limpia.log. Esto no aprueba la recuperación exigida desde HF.')
     p(f'Recursos medidos: Linux {platform.machine()}, Python {platform.python_version()}, {os.cpu_count()} CPU visibles; límite de threads BLAS=2 en fit. Máximo RSS reportado por proceso de entrenamiento: {max(table.apply(lambda r: read_json(f"evidencias/mlflow/{r.mlflow_run_id}/run.json")["max_rss_kib_process"],axis=1))/1024:.1f} MiB (acumulado del proceso, no pico incremental por modelo). Tiempos individuales en experimentos.csv; auditoría {audit["elapsed_seconds"]:.3f} s.')
-    p('GitHub: ' + ('push y lectura desde un clon remoto nuevos comprobados. El usuario autorizó publicar incluso si el repositorio es público. El acceso de la cuenta del docente no se ha comprobado.' if github.get('read_verified') else 'publicación/acceso NO comprobado; consultar los bloqueos de acceso. El historial local recuperable se entrega en bundle.'))
-    p('La finalización no volvió a entrenar ni a evaluar test. La publicación HF es posterior al test original; trazabilidad-final.json une sus SHA con el hash del mismo pipeline, sin alterar selección ni resultados. Pendiente: acceso del docente a los repositorios privados.')
+    p('GitHub: ' + ('repositorio público; API consultada sin token y lectura pública comprobada. No se necesita invitar al docente para consultar el código.' if github.get('anonymous_read_verified') else 'push y clon remoto comprobados; si permanece privado, falta verificar el permiso propio del docente.'))
+    p('La finalización no volvió a entrenar ni a evaluar test. La publicación HF es posterior al test original; trazabilidad-final.json une sus SHA con el hash del mismo pipeline, sin alterar selección ni resultados. HF permite lectura pública; el acceso a GitHub se documenta por separado.')
     p('Contribuciones: '+people['declaracion_contribucion']+' Codex asistió con descarga, auditoría, código, entrenamiento, trazabilidad y documentos, comprobados con logs. La integrante es responsable de revisar y comprender la solución. No se adaptaron soluciones docentes; dependencias en requirements.txt y datos atribuidos a UNSW.')
     p('Fuentes: PDF del profesor (16-10-2026); research.unsw.edu.au/projects/unsw-nb15-dataset; mirror Nir-J/ML-Projects commit 44bbd02b9e70f74dd915218d5eb702f125341ffc; git-scm.com/doc; doc.dvc.org/start; mlflow.org/docs/latest/ml/tracking; huggingface.co/docs/huggingface_hub/guides/download; scikit-learn.org/stable/common_pitfalls.html.')
     doc=SimpleDocTemplate(str(root / 'informe.pdf'),pagesize=A4,rightMargin=50,leftMargin=50,topMargin=38,bottomMargin=38)
@@ -128,13 +128,13 @@ def main():
 - GitHub solicitado: https://github.com/angiedonatto/Versionamiento
 - Revisión base del paquete: `{final}`. El commit final de empaquetado se registra en `revision-entrega.txt` junto al ZIP y en el historial Git; no se inventa una autorreferencia de commit.
 - Publicación GitHub: {"PUSH Y CLON REMOTO VERIFICADOS. El usuario autorizó publicar incluso si el repositorio es público; no se cambió su privacidad." if github.get("read_verified") else "PENDIENTE/NO COMPROBADA; consultar logs de acceso."}
-- Acceso de la cuenta del docente: no comprobado; si el repositorio es privado, conceder lectura mediante invitación.
+- Acceso: repositorios públicos autorizados; se documentan comprobaciones de lectura sin token. No se afirma haber iniciado sesión con la cuenta del docente ni enviado invitaciones.
 - Historial sin dependencia de GitHub: `historial.bundle` dentro del ZIP; `git clone historial.bundle proyecto`.
 
 ## Trazabilidad por versión
 '''
     for v,cfg in versions.items():
-        text+=f'\n### {v}\n\n- Commit productor: `{cfg["git_commit"]}`.\n- Tag recuperable: `{v}`.\n- DVC raw: `{cfg["dvc_reference"]["data/raw.dvc"]["sha256"]}` (SHA256 del puntero).\n- DVC preparados: `{cfg["dvc_reference"]["data/processed.dvc"]["sha256"]}` (SHA256 del puntero; contenido íntegro en evidencias/{v}.json).\n- MLflow run: `{cfg["mlflow_run_id"]}`.\n- Familia: {cfg["family"]}; parámetros: `{cfg["params"]}`.\n- Umbral: `{cfg["threshold"]}`; ataque si score >= umbral.\n- Modelo SHA256: `{cfg["model_sha256"]}`.\n- HF: '+(f'{hf[v]["url"]}/tree/{hf[v]["sha"]} (privado; SHA completo `{hf[v]["sha"]}`)' if v in hf else '**BLOQUEADO: HF_TOKEN no disponible o acceso sin resolver; no existe URL/SHA publicado comprobado.**')+'\n'
+        text+=f'\n### {v}\n\n- Commit productor: `{cfg["git_commit"]}`.\n- Tag recuperable: `{v}`.\n- DVC raw: `{cfg["dvc_reference"]["data/raw.dvc"]["sha256"]}` (SHA256 del puntero).\n- DVC preparados: `{cfg["dvc_reference"]["data/processed.dvc"]["sha256"]}` (SHA256 del puntero; contenido íntegro en evidencias/{v}.json).\n- MLflow run: `{cfg["mlflow_run_id"]}`.\n- Familia: {cfg["family"]}; parámetros: `{cfg["params"]}`.\n- Umbral: `{cfg["threshold"]}`; ataque si score >= umbral.\n- Modelo SHA256: `{cfg["model_sha256"]}`.\n- HF: '+(f'{hf[v]["url"]}/tree/{hf[v]["sha"]} (público, autorizado; SHA completo `{hf[v]["sha"]}`)' if v in hf else '**BLOQUEADO: no existe SHA publicado comprobado.**')+'\n'
     text+='''
 ## Evidencias y almacenamiento
 
@@ -156,8 +156,8 @@ def main():
 - `informe.pdf`: máximo cinco páginas; generado desde evidencia real.
 - **`dvc-storage.zip` se entrega aparte**. Extraer junto al proyecto: debe quedar `../dvc-storage`. `.dvc/config` configura remote `entrega`. Ejecutar `DVC_SITE_CACHE_DIR="$PWD/.runtime/dvc-site" dvc pull`.
 - Ubicación de los tres entregables: directorio de entrega `/workspace/entrega-defiende/` de esta tarea. No es un servicio público: descargar y adjuntar al canal del profesor, o compartir carpeta con permiso de lectura. Sin esa acción no se afirma acceso docente.
-- Distribución privada de archivos: https://huggingface.co/datasets/angiedonatto/defiende-el-servidor-entregables . El SHA inmutable de la entrega y los enlaces directos de descarga se guardan en `verificacion-publicacion.json`, junto a los archivos.
-- Índice GitHub de entrega: https://github.com/angiedonatto/Versionamiento/releases/tag/entrega-grupo-b-2026-10-30 . Esta revisión corrige únicamente la identificación del grupo; conserva las publicaciones anteriores. Su publicación y los enlaces de archivos se comprueban en verificacion-publicacion.json. Se usa el destino HF privado autorizado, sin tocar los modelos congelados.
+- Distribución pública autorizada de archivos: https://huggingface.co/datasets/angiedonatto/defiende-el-servidor-entregables . El SHA inmutable de la entrega y los enlaces directos de descarga se guardan en `verificacion-publicacion.json`, junto a los archivos.
+- Índice GitHub de entrega: https://github.com/angiedonatto/Versionamiento/releases/tag/entrega-grupo-b-2026-10-30 . Esta revisión confirma grupo B y documenta la visibilidad pública autorizada; conserva versiones anteriores, sin tocar modelos congelados.
 - `auditoria-cumplimiento.md` y `.json` junto al ZIP: auditoría definitiva de los ocho requisitos y de cada componente de la rúbrica, incluidos pendientes administrativos.
 
 ## Ejecución medida y limitaciones
@@ -199,12 +199,12 @@ python -m src.lifecycle recompute
 python -m src.verify
 ```
 
-HF_TOKEN debe ser propio o proporcionado por el entorno seguro y tener permiso
-de lectura del repositorio privado. Nunca entregar ni publicar credenciales.
+La lectura pública de HF no requiere token; las escrituras sí usan autenticación
+segura. Nunca entregar ni publicar credenciales.
 Los SHA evaluados no se sustituyen por main, tags móviles o nuevas serializaciones.
 
-Pendiente de la entrega humana: comprobar el acceso de la cuenta del profesor
-a GitHub, la release y ambos repositorios HF privados. El grupo B ya está confirmado.
+El grupo B ya está confirmado. Las lecturas públicas de HF y GitHub se comprueban
+sin token, sin exigir credenciales del docente ni inventar invitaciones.
 La prueba con la cuenta propietaria no demuestra acceso del docente. No se
 inventan usuarios ni se afirma que se enviaron invitaciones o la entrega.
 

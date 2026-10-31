@@ -1,0 +1,16 @@
+{
+  "authorized_at_utc": "2026-10-31T04:32:26.603476+00:00",
+  "authorized_by_user": true,
+  "authorization": "Mantener públicos; autorizo la actualización",
+  "hf_models_private": false,
+  "hf_artifacts_private": false,
+  "hf_models_repo": "angiedonatto/defiende-el-servidor",
+  "hf_artifacts_repo": "angiedonatto/defiende-el-servidor-entregables",
+  "allowed_payloads": [
+    "ZIP del proyecto",
+    "informe PDF",
+    "respaldo DVC académico",
+    "auditorías y documentación"
+  ],
+  "credentials_allowed": false
+}

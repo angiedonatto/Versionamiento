@@ -4,7 +4,7 @@
   "authorization": "Sí, autorizo esos archivos en ese repositorio privado",
   "repo_id": "angiedonatto/defiende-el-servidor-entregables",
   "repo_type": "dataset",
-  "private_required": true,
+  "private_required": false,
   "allowed_payloads": [
     "proyecto.zip",
     "informe.pdf",
@@ -13,5 +13,8 @@
     "hashes y documentación de entrega"
   ],
   "credentials_allowed": false,
-  "supersedes": "Rechazo previo por falta de autorización específica para los archivos en el nuevo destino."
+  "supersedes": "Rechazo previo por falta de autorización específica para los archivos en el nuevo destino.",
+  "private": false,
+  "public_update_authorized_by_user": true,
+  "visibility_authorization": "configs/visibilidad.json"
 }
