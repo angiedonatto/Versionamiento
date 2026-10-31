@@ -104,7 +104,7 @@ def select():
                 'model_sha256': v2['model_sha256'], 'mlflow_run_id': v2['mlflow_run_id'],
                 'dvc_reference': v2['dvc_reference'], 'git_code_commit': v2['git_commit'],
                 'hf_repo': None, 'hf_sha': None, 'test_evaluated_at_selection': False,
-                'reason': 'Regla predeclarada en configs/experiments.json; cambio de familia/parametros y umbral respecto a v1; 4 configuraciones, misma validation.',
+                'reason': 'Regla predeclarada: cuatro configuraciones con la misma validation; v2 cambia a arbol profundidad 16/hojas >=5. Se exploran 17 umbrales por configuracion y se conserva 0.5. Sin etiquetas ni metricas test.',
                 'v1_validation': v1['validation'], 'v2_validation': v2['validation']}
     write_json('evidencias/seleccion.json', decision)
     print('Congelado:', winner, flush=True)

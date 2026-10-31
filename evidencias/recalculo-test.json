@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "recomputed_at_utc": "2026-10-31T01:23:17.410974+00:00",
+  "source": "predicciones-test.csv",
+  "metrics": {
+    "recall_attack": 0.9654548663195976,
+    "precision_attack": 0.8391042601326738,
+    "fpr": 0.2268108108108108,
+    "macro_f1": 0.8748071555399811,
+    "accuracy": 0.8790506728853908,
+    "tn": 28608,
+    "fp": 8392,
+    "fn": 1566,
+    "tp": 43766,
+    "confusion_matrix": [
+      [
+        28608,
+        8392
+      ],
+      [
+        1566,
+        43766
+      ]
+    ],
+    "positive_class": 1,
+    "zero_division": 0
+  }
+}

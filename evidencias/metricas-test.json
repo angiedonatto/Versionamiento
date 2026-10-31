@@ -1,0 +1,37 @@
+{
+  "evaluated_at_utc": "2026-10-31T01:23:13.793951+00:00",
+  "version": "v2",
+  "freeze_commit": "fea17dd5fb017d3ceacf6cf94dadc274b5432d7e",
+  "selection_sha256": "f976737cc47b07699d5e0e2e3a751fde56315b763b63e02601e7c9a16f22eabc",
+  "model_sha256": "a2d7aebf559a8393bb55a3ad80f698d1777bfe971eed850f463bbc6d96cdc95c",
+  "huggingface": null,
+  "test_sha256": "734fe6642edf758f7c94d7d9149426b49d202fe8e7bf0bef47392489c3c0a559",
+  "rows": 82332,
+  "threshold": 0.5,
+  "threshold_rule": "score_attack >= threshold",
+  "predictions_sha256": "a34c8820b678e57d3aeaef4c108ea84b1fc7e9ca85c128a6701f12a49570fe35",
+  "metrics": {
+    "recall_attack": 0.9654548663195976,
+    "precision_attack": 0.8391042601326738,
+    "fpr": 0.2268108108108108,
+    "macro_f1": 0.8748071555399811,
+    "accuracy": 0.8790506728853908,
+    "tn": 28608,
+    "fp": 8392,
+    "fn": 1566,
+    "tp": 43766,
+    "confusion_matrix": [
+      [
+        28608,
+        8392
+      ],
+      [
+        1566,
+        43766
+      ]
+    ],
+    "positive_class": 1,
+    "zero_division": 0
+  },
+  "elapsed_seconds": 0.5828218149999884
+}

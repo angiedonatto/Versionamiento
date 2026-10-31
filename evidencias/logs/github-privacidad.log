@@ -1,0 +1,5 @@
+
+[2026-10-31T01:23:26.453823+00:00] cwd=/workspace/Versionamiento
+$ gh api repos/angiedonatto/Versionamiento --jq '{full_name,private,permissions}'
+Get "https://api.github.com/repos/angiedonatto/Versionamiento": Forbidden
+{"command": ["gh", "api", "repos/angiedonatto/Versionamiento", "--jq", "{full_name,private,permissions}"], "started_at_utc": "2026-10-31T01:23:26.453823+00:00", "finished_at_utc": "2026-10-31T01:23:26.545194+00:00", "elapsed_seconds": 0.09137071500003913, "exit_code": 1}
