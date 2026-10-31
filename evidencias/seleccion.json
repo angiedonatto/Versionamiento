@@ -1,0 +1,73 @@
+{
+  "frozen_at_utc": "2026-10-31T01:21:44.755016+00:00",
+  "code_commit_at_selection": "58a16abe254d6104a7d3ad11af168c1adfffa747",
+  "rule": "Maximizar macro-F1 en validation entre modelos no baseline y umbrales 0.10..0.90 cada 0.05 con recall >= 0.90; si ninguno cumple, maximizar macro-F1 sin restriccion. Desempate: menor FPR, mayor threshold, id lexicografico.",
+  "feasible_recall_constraint": true,
+  "version": "v2",
+  "experiment": "tree_d16",
+  "threshold": 0.5,
+  "threshold_rule": "score_attack >= threshold",
+  "model_sha256": "a2d7aebf559a8393bb55a3ad80f698d1777bfe971eed850f463bbc6d96cdc95c",
+  "mlflow_run_id": "d5002ef5f9544389ab3597c526771740",
+  "dvc_reference": {
+    "data/raw.dvc": {
+      "sha256": "aef69f0eb635b870b7d72e66e9ebdc27c29ad9f22df065bb6405aa6db29d6870",
+      "contents": "outs:\n- md5: fe93051ae209ffb0128a31e7a478c009.dir\n  size: 47673818\n  nfiles: 2\n  hash: md5\n  path: raw\n"
+    },
+    "data/processed.dvc": {
+      "sha256": "8a3465fc54393b03148751c2c1db1422ca8c1ed48adb307fac757d16eade75a6",
+      "contents": "outs:\n- md5: 6b14e097de5c2d61d457699b6e63113f.dir\n  size: 71156267\n  nfiles: 4\n  hash: md5\n  path: processed\n"
+    }
+  },
+  "git_code_commit": "d7e3d35b724fc5828a79cdd68200fc560194a54d",
+  "hf_repo": null,
+  "hf_sha": null,
+  "test_evaluated_at_selection": false,
+  "reason": "Regla predeclarada en configs/experiments.json; cambio de familia/parametros y umbral respecto a v1; 4 configuraciones, misma validation.",
+  "v1_validation": {
+    "recall_attack": 0.9891205427318607,
+    "precision_attack": 0.9176068769667665,
+    "fpr": 0.18988237375077385,
+    "macro_f1": 0.9178829910834567,
+    "accuracy": 0.9320763225388236,
+    "tn": 9160,
+    "fp": 2147,
+    "fn": 263,
+    "tp": 23911,
+    "confusion_matrix": [
+      [
+        9160,
+        2147
+      ],
+      [
+        263,
+        23911
+      ]
+    ],
+    "positive_class": 1,
+    "zero_division": 0
+  },
+  "v2_validation": {
+    "recall_attack": 0.9599983453296931,
+    "precision_attack": 0.9630659418184836,
+    "fpr": 0.07871230211373485,
+    "macro_f1": 0.9398455412454236,
+    "accuracy": 0.947662129026803,
+    "tn": 10417,
+    "fp": 890,
+    "fn": 967,
+    "tp": 23207,
+    "confusion_matrix": [
+      [
+        10417,
+        890
+      ],
+      [
+        967,
+        23207
+      ]
+    ],
+    "positive_class": 1,
+    "zero_division": 0
+  }
+}

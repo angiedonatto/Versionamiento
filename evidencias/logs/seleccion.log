@@ -1,0 +1,5 @@
+
+[2026-10-31T01:21:42.362498+00:00] cwd=/workspace/Versionamiento
+$ /workspace/defiende-venv/bin/python -m src.lifecycle select
+Congelado: {'id': 'tree_d16', 'threshold': 0.5, 'recall_attack': 0.9599983453296931, 'precision_attack': 0.9630659418184836, 'fpr': 0.07871230211373485, 'macro_f1': 0.9398455412454236, 'accuracy': 0.947662129026803, 'tn': 10417, 'fp': 890, 'fn': 967, 'tp': 23207, 'confusion_matrix': [[10417, 890], [967, 23207]], 'positive_class': 1, 'zero_division': 0}
+{"command": ["/workspace/defiende-venv/bin/python", "-m", "src.lifecycle", "select"], "started_at_utc": "2026-10-31T01:21:42.362498+00:00", "finished_at_utc": "2026-10-31T01:21:44.864199+00:00", "elapsed_seconds": 2.5017067830000315, "exit_code": 0}
