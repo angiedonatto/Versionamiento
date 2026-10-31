@@ -1,0 +1,7 @@
+
+[2026-10-31T01:21:07.584489+00:00] cwd=/workspace/Versionamiento
+$ /workspace/defiende-venv/bin/python -m src.train --ids lr_c10 tree_d08 tree_d16
+lr_c10 e9db99f3d08943729737d5cb23292600 {'recall_attack': 0.9884173078514106, 'precision_attack': 0.9237252097266788, 'fpr': 0.17449367648359423, 'macro_f1': 0.9236430409842, 'accuracy': 0.9365012260082861, 'tn': 9334, 'fp': 1973, 'fn': 280, 'tp': 23894, 'confusion_matrix': [[9334, 1973], [280, 23894]], 'positive_class': 1, 'zero_division': 0} seconds 15.702507822999962
+tree_d08 3a7416e0075e4726a689de9e6c6ff475 {'recall_attack': 0.948208819392736, 'precision_attack': 0.9628665042426279, 'fpr': 0.07818165738038384, 'macro_f1': 0.9312695739663812, 'accuracy': 0.9397987655364843, 'tn': 10423, 'fp': 884, 'fn': 1252, 'tp': 22922, 'confusion_matrix': [[10423, 884], [1252, 22922]], 'positive_class': 1, 'zero_division': 0} seconds 2.518572164000034
+tree_d16 d5002ef5f9544389ab3597c526771740 {'recall_attack': 0.9599983453296931, 'precision_attack': 0.9630659418184836, 'fpr': 0.07871230211373485, 'macro_f1': 0.9398455412454236, 'accuracy': 0.947662129026803, 'tn': 10417, 'fp': 890, 'fn': 967, 'tp': 23207, 'confusion_matrix': [[10417, 890], [967, 23207]], 'positive_class': 1, 'zero_division': 0} seconds 5.054063664000012
+{"command": ["/workspace/defiende-venv/bin/python", "-m", "src.train", "--ids", "lr_c10", "tree_d08", "tree_d16"], "started_at_utc": "2026-10-31T01:21:07.584489+00:00", "finished_at_utc": "2026-10-31T01:21:33.017507+00:00", "elapsed_seconds": 25.433078653999985, "exit_code": 0}

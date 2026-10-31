@@ -1,0 +1,55 @@
+{
+  "id": "lr_c10",
+  "hypothesis": "Menor regularizacion permite mejorar macro-F1, a costa de estabilidad y tiempo.",
+  "change": "C pasa de 0.1 a 10",
+  "family": "LogisticRegression",
+  "params": {
+    "C": 10.0,
+    "max_iter": 1000,
+    "solver": "liblinear"
+  },
+  "seed": 20261016,
+  "git_commit": "d7e3d35b724fc5828a79cdd68200fc560194a54d",
+  "dvc_reference": {
+    "data/raw.dvc": {
+      "sha256": "aef69f0eb635b870b7d72e66e9ebdc27c29ad9f22df065bb6405aa6db29d6870",
+      "contents": "outs:\n- md5: fe93051ae209ffb0128a31e7a478c009.dir\n  size: 47673818\n  nfiles: 2\n  hash: md5\n  path: raw\n"
+    },
+    "data/processed.dvc": {
+      "sha256": "8a3465fc54393b03148751c2c1db1422ca8c1ed48adb307fac757d16eade75a6",
+      "contents": "outs:\n- md5: 6b14e097de5c2d61d457699b6e63113f.dir\n  size: 71156267\n  nfiles: 4\n  hash: md5\n  path: processed\n"
+    }
+  },
+  "mlflow_run_id": "e9db99f3d08943729737d5cb23292600",
+  "threshold": 0.5,
+  "threshold_rule": "score_attack >= threshold",
+  "model_sha256": "02488e6fa6e3d0667e057c1a927df18266c8f52d3b1ca02cc0fc4a7d148377cf",
+  "validation": {
+    "recall_attack": 0.9884173078514106,
+    "precision_attack": 0.9237252097266788,
+    "fpr": 0.17449367648359423,
+    "macro_f1": 0.9236430409842,
+    "accuracy": 0.9365012260082861,
+    "tn": 9334,
+    "fp": 1973,
+    "fn": 280,
+    "tp": 23894,
+    "confusion_matrix": [
+      [
+        9334,
+        1973
+      ],
+      [
+        280,
+        23894
+      ]
+    ],
+    "positive_class": 1,
+    "zero_division": 0
+  },
+  "elapsed_seconds": 15.702507822999962,
+  "max_rss_kib_process": 556756,
+  "warnings": [],
+  "converged": true,
+  "finished_at_utc": "2026-10-31T01:21:25.236507+00:00"
+}

@@ -1,0 +1,57 @@
+{
+  "info": {
+    "artifact_uri": "./e9db99f3d08943729737d5cb23292600/",
+    "end_time": 1793409685242,
+    "experiment_id": "352711204172352423",
+    "lifecycle_stage": "active",
+    "run_id": "e9db99f3d08943729737d5cb23292600",
+    "run_name": "lr_c10",
+    "start_time": 1793409669571,
+    "status": "FINISHED",
+    "user_id": "agent"
+  },
+  "data": {
+    "metrics": {
+      "precision_attack": 0.9237252097266788,
+      "accuracy": 0.9365012260082861,
+      "fp": 1973.0,
+      "tn": 9334.0,
+      "tp": 23894.0,
+      "recall_attack": 0.9884173078514106,
+      "macro_f1": 0.9236430409842,
+      "fpr": 0.17449367648359423,
+      "fn": 280.0,
+      "zero_division": 0.0,
+      "elapsed_seconds": 15.702507822999962,
+      "positive_class": 1.0
+    },
+    "params": {
+      "family": "LogisticRegression",
+      "dvc_raw_sha256": "aef69f0eb635b870b7d72e66e9ebdc27c29ad9f22df065bb6405aa6db29d6870",
+      "train_rows": "139860",
+      "seed": "20261016",
+      "git_commit": "d7e3d35b724fc5828a79cdd68200fc560194a54d",
+      "C": "10.0",
+      "max_iter": "1000",
+      "dvc_processed_sha256": "8a3465fc54393b03148751c2c1db1422ca8c1ed48adb307fac757d16eade75a6",
+      "validation_rows": "35481",
+      "threshold": "0.5",
+      "solver": "liblinear"
+    },
+    "tags": {
+      "mlflow.runName": "lr_c10",
+      "change": "C pasa de 0.1 a 10",
+      "mlflow.source.git.commit": "d7e3d35b724fc5828a79cdd68200fc560194a54d",
+      "mlflow.source.type": "LOCAL",
+      "hypothesis": "Menor regularizacion permite mejorar macro-F1, a costa de estabilidad y tiempo.",
+      "positive_class": "attack=1"
+    }
+  },
+  "inputs": {
+    "model_inputs": [],
+    "dataset_inputs": []
+  },
+  "outputs": {
+    "model_outputs": []
+  }
+}

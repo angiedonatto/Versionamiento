@@ -1,0 +1,5 @@
+
+[2026-10-31T01:21:39.860663+00:00] cwd=/workspace/Versionamiento
+$ /workspace/defiende-venv/bin/python -m src.export_mlflow
+4 entidades MLflow FINISHED exportadas
+{"command": ["/workspace/defiende-venv/bin/python", "-m", "src.export_mlflow"], "started_at_utc": "2026-10-31T01:21:39.860663+00:00", "finished_at_utc": "2026-10-31T01:21:41.292019+00:00", "elapsed_seconds": 1.4313619419999668, "exit_code": 0}

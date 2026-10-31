@@ -1,0 +1,56 @@
+{
+  "info": {
+    "artifact_uri": "./3a7416e0075e4726a689de9e6c6ff475/",
+    "end_time": 1793409687767,
+    "experiment_id": "352711204172352423",
+    "lifecycle_stage": "active",
+    "run_id": "3a7416e0075e4726a689de9e6c6ff475",
+    "run_name": "tree_d08",
+    "start_time": 1793409685243,
+    "status": "FINISHED",
+    "user_id": "agent"
+  },
+  "data": {
+    "metrics": {
+      "precision_attack": 0.9628665042426279,
+      "accuracy": 0.9397987655364843,
+      "fp": 884.0,
+      "tn": 10423.0,
+      "tp": 22922.0,
+      "recall_attack": 0.948208819392736,
+      "macro_f1": 0.9312695739663812,
+      "fpr": 0.07818165738038384,
+      "fn": 1252.0,
+      "zero_division": 0.0,
+      "elapsed_seconds": 2.518572164000034,
+      "positive_class": 1.0
+    },
+    "params": {
+      "family": "DecisionTreeClassifier",
+      "dvc_raw_sha256": "aef69f0eb635b870b7d72e66e9ebdc27c29ad9f22df065bb6405aa6db29d6870",
+      "train_rows": "139860",
+      "seed": "20261016",
+      "git_commit": "d7e3d35b724fc5828a79cdd68200fc560194a54d",
+      "min_samples_leaf": "20",
+      "max_depth": "8",
+      "dvc_processed_sha256": "8a3465fc54393b03148751c2c1db1422ca8c1ed48adb307fac757d16eade75a6",
+      "validation_rows": "35481",
+      "threshold": "0.5"
+    },
+    "tags": {
+      "mlflow.runName": "tree_d08",
+      "change": "arbol limitado a profundidad 8 y hojas >=20",
+      "mlflow.source.git.commit": "d7e3d35b724fc5828a79cdd68200fc560194a54d",
+      "mlflow.source.type": "LOCAL",
+      "hypothesis": "Interacciones no lineales mejoran deteccion respecto de una frontera lineal.",
+      "positive_class": "attack=1"
+    }
+  },
+  "inputs": {
+    "model_inputs": [],
+    "dataset_inputs": []
+  },
+  "outputs": {
+    "model_outputs": []
+  }
+}

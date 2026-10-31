@@ -1,0 +1,57 @@
+{
+  "info": {
+    "artifact_uri": "./dbabc72d10584079894a1d4829fb4ddc/",
+    "end_time": 1793409631595,
+    "experiment_id": "352711204172352423",
+    "lifecycle_stage": "active",
+    "run_id": "dbabc72d10584079894a1d4829fb4ddc",
+    "run_name": "lr_c01",
+    "start_time": 1793409628492,
+    "status": "FINISHED",
+    "user_id": "agent"
+  },
+  "data": {
+    "metrics": {
+      "precision_attack": 0.9176068769667665,
+      "accuracy": 0.9320763225388236,
+      "fp": 2147.0,
+      "tn": 9160.0,
+      "tp": 23911.0,
+      "recall_attack": 0.9891205427318607,
+      "macro_f1": 0.9178829910834567,
+      "fpr": 0.18988237375077385,
+      "fn": 263.0,
+      "zero_division": 0.0,
+      "elapsed_seconds": 3.131079891000013,
+      "positive_class": 1.0
+    },
+    "params": {
+      "family": "LogisticRegression",
+      "dvc_raw_sha256": "aef69f0eb635b870b7d72e66e9ebdc27c29ad9f22df065bb6405aa6db29d6870",
+      "train_rows": "139860",
+      "seed": "20261016",
+      "git_commit": "91b68ca202873d828a21f627473a61eee632d872",
+      "C": "0.1",
+      "max_iter": "1000",
+      "dvc_processed_sha256": "8a3465fc54393b03148751c2c1db1422ca8c1ed48adb307fac757d16eade75a6",
+      "validation_rows": "35481",
+      "threshold": "0.5",
+      "solver": "liblinear"
+    },
+    "tags": {
+      "mlflow.runName": "lr_c01",
+      "change": "baseline v1",
+      "mlflow.source.git.commit": "91b68ca202873d828a21f627473a61eee632d872",
+      "mlflow.source.type": "LOCAL",
+      "hypothesis": "Una frontera lineal regularizada ofrece una referencia interpretable y barata.",
+      "positive_class": "attack=1"
+    }
+  },
+  "inputs": {
+    "model_inputs": [],
+    "dataset_inputs": []
+  },
+  "outputs": {
+    "model_outputs": []
+  }
+}
