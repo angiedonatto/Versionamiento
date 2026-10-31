@@ -26,6 +26,9 @@ def main():
     recovery = read_json('evidencias/recuperacion/resultado.json') if Path('evidencias/recuperacion/resultado.json').exists() else {}
     hf = read_json('evidencias/huggingface.json') if Path('evidencias/huggingface.json').exists() else {}
     github = read_json('evidencias/github.json') if Path('evidencias/github.json').exists() else {}
+    people=read_json('configs/integrantes.json')
+    author='; '.join(person['nombre'] for person in people['integrantes'])
+    group='; '.join(person['grupo'] for person in people['integrantes'])
     styles = getSampleStyleSheet()
     fonts = Path(reportlab.__file__).parent / 'fonts'
     pdfmetrics.registerFont(TTFont('VeraEmbedded',str(fonts / 'Vera.ttf')))
@@ -46,7 +49,7 @@ def main():
         story.append(Spacer(1,8))
     p('Defiende el servidor', 'Title')
     p('Informe académico MLOps · evidencia ejecutada, sin garantía de eficacia operacional')
-    p('Integrante(s): [NOMBRES POR COMPLETAR]. Grupo: [A/B POR COMPLETAR]. No se infieren identidades de credenciales o de Git.')
+    p(f'Integrante: {author}. Modalidad: individual. Grupo: {group}. Letra A/B no confirmada; no se infiere del horario.')
     heading('1. Datos, procedencia y auditoría')
     p('UNSW-NB15: se descargaron las dos particiones académicas desde el mirror inmutable enlazado en el PDF del profesor. Los SHA-256 coinciden exactamente con el anexo. Fecha UTC de descarga: 31 octubre 2026 (30 octubre en Bogotá). El mirror no constituye autenticación frente al archivo oficial UNSW.')
     rows = [['Partición','Filas','Columnas','Normal / ataque','Duplicados extra','Grupos contradict.']]
@@ -103,8 +106,8 @@ def main():
         p(f'Comprobación suplementaria desde el checkout nuevo y venv nuevo (fuente Git local, NO HF): {local["rows"]} filas, clases idénticas en v1/v2; diferencias máximas de scores {local["versions"]["v1"]["max_score_difference"]} y {local["versions"]["v2"]["max_score_difference"]}. Log: local-suplementaria-limpia.log. Esto no aprueba la recuperación exigida desde HF.')
     p(f'Recursos medidos: Linux {platform.machine()}, Python {platform.python_version()}, {os.cpu_count()} CPU visibles; límite de threads BLAS=2 en fit. Máximo RSS reportado por proceso de entrenamiento: {max(table.apply(lambda r: read_json(f"evidencias/mlflow/{r.mlflow_run_id}/run.json")["max_rss_kib_process"],axis=1))/1024:.1f} MiB (acumulado del proceso, no pico incremental por modelo). Tiempos individuales en experimentos.csv; auditoría {audit["elapsed_seconds"]:.3f} s.')
     p('GitHub: ' + ('push y lectura desde un clon remoto nuevos comprobados. El usuario autorizó publicar incluso si el repositorio es público. El acceso de la cuenta del docente no se ha comprobado.' if github.get('read_verified') else 'publicación/acceso NO comprobado; consultar los bloqueos de acceso. El historial local recuperable se entrega en bundle.'))
-    p('La finalización no volvió a entrenar ni a evaluar test. La publicación HF es posterior al test original; trazabilidad-final.json une sus SHA con el hash del mismo pipeline, sin alterar la selección congelada ni los resultados. Pendiente administrativo: datos de integrantes y permiso de lectura del docente en los repositorios privados.')
-    p('Contribuciones: Codex implementó y ejecutó descarga, auditoría, código, entrenamiento, trazabilidad y documentos. Nombres, grupos, contribuciones humanas y comprensión del trabajo deben ser completados/verificados por los integrantes; no se atribuyen aportes no informados. No se adaptó código externo de soluciones docentes. Dependencias externas se identifican en requirements.txt; datos atribuidos a UNSW.')
+    p('La finalización no volvió a entrenar ni a evaluar test. La publicación HF es posterior al test original; trazabilidad-final.json une sus SHA con el hash del mismo pipeline, sin alterar selección ni resultados. Pendiente: acceso del docente a los repositorios privados y letra A/B si se exige.')
+    p('Contribuciones: '+people['declaracion_contribucion']+' Codex asistió con descarga, auditoría, código, entrenamiento, trazabilidad y documentos, comprobados con logs. La integrante es responsable de revisar y comprender la solución. No se adaptaron soluciones docentes; dependencias en requirements.txt y datos atribuidos a UNSW.')
     p('Fuentes: PDF del profesor (16-10-2026); research.unsw.edu.au/projects/unsw-nb15-dataset; mirror Nir-J/ML-Projects commit 44bbd02b9e70f74dd915218d5eb702f125341ffc; git-scm.com/doc; doc.dvc.org/start; mlflow.org/docs/latest/ml/tracking; huggingface.co/docs/huggingface_hub/guides/download; scikit-learn.org/stable/common_pitfalls.html.')
     doc=SimpleDocTemplate(str(root / 'informe.pdf'),pagesize=A4,rightMargin=50,leftMargin=50,topMargin=38,bottomMargin=38)
     def footer(canvas, document):
@@ -119,9 +122,9 @@ def main():
     final=git_head()
     text=f'''# Índice de entrega — Defiende el servidor
 
-- Integrantes: **[NOMBRES COMPLETOS POR COMPLETAR]**.
-- Grupo de cada integrante: **[A/B POR COMPLETAR]**.
-- Contribución humana: **[CADA INTEGRANTE DEBE DECLARAR Y COMPRENDER SU APORTE]**.
+- Integrante única: **{author}**.
+- Grupo: **{group}**. Letra A/B no confirmada; no se inventa.
+- Contribución: {people['declaracion_contribucion']}
 - GitHub solicitado: https://github.com/angiedonatto/Versionamiento
 - Revisión base del paquete: `{final}`. El commit final de empaquetado se registra en `revision-entrega.txt` junto al ZIP y en el historial Git; no se inventa una autorreferencia de commit.
 - Publicación GitHub: {"PUSH Y CLON REMOTO VERIFICADOS. El usuario autorizó publicar incluso si el repositorio es público; no se cambió su privacidad." if github.get("read_verified") else "PENDIENTE/NO COMPROBADA; consultar logs de acceso."}
@@ -154,7 +157,7 @@ def main():
 - **`dvc-storage.zip` se entrega aparte**. Extraer junto al proyecto: debe quedar `../dvc-storage`. `.dvc/config` configura remote `entrega`. Ejecutar `DVC_SITE_CACHE_DIR="$PWD/.runtime/dvc-site" dvc pull`.
 - Ubicación de los tres entregables: directorio de entrega `/workspace/entrega-defiende/` de esta tarea. No es un servicio público: descargar y adjuntar al canal del profesor, o compartir carpeta con permiso de lectura. Sin esa acción no se afirma acceso docente.
 - Distribución privada de archivos: https://huggingface.co/datasets/angiedonatto/defiende-el-servidor-entregables . El SHA inmutable de la entrega y los enlaces directos de descarga se guardan en `verificacion-publicacion.json`, junto a los archivos.
-- Índice GitHub previsto para la entrega final: https://github.com/angiedonatto/Versionamiento/releases/tag/entrega-verificada-2026-10-30 . Su publicación y los enlaces de archivos sólo se consideran comprobados cuando figuran en verificacion-publicacion.json. La carga binaria a uploads.github.com falló con HTTP 401; la alternativa HF privada requiere autorización para los archivos, sin tocar los modelos congelados.
+- Índice GitHub de entrega: https://github.com/angiedonatto/Versionamiento/releases/tag/entrega-verificada-2026-10-30 . Su publicación y los enlaces de archivos se comprueban en verificacion-publicacion.json. La carga binaria a uploads.github.com falló con HTTP 401; la estudiante autorizó expresamente distribuir los entregables en el destino HF privado separado, sin tocar los modelos congelados.
 - `auditoria-cumplimiento.md` y `.json` junto al ZIP: auditoría definitiva de los ocho requisitos y de cada componente de la rúbrica, incluidos pendientes administrativos.
 
 ## Ejecución medida y limitaciones
@@ -174,8 +177,9 @@ No se afirma prueba de lectura del docente sin conocer sus cuentas y conceder ac
 Se utilizó **OpenAI Codex** para leer los requisitos, implementar scripts, ejecutar
 comandos, diagnosticar dependencias, entrenar, comparar y generar documentos.
 Todas las cifras provienen de ejecuciones; lo bloqueado se informa como tal.
-El estudiante debe revisar, comprender y poder explicar el código y completar
-su contribución real. No se inventa nombre, grupo ni participación humana.
+Angie Valentina Donato Pita es la única integrante y contribuyente estudiantil,
+según su declaración. Es responsable de revisar, comprender y poder explicar
+la solución; la asistencia de Codex se mantiene explícitamente declarada.
 No se usaron soluciones docentes ni fragmentos adaptados de terceros; se usaron
 APIs de herramientas de código abierto, identificadas en requirements.txt.
 Datos de UNSW-NB15 con atribución y condiciones académicas de la fuente oficial.
@@ -199,13 +203,13 @@ HF_TOKEN debe ser propio o proporcionado por el entorno seguro y tener permiso
 de lectura del repositorio privado. Nunca entregar ni publicar credenciales.
 Los SHA evaluados no se sustituyen por main, tags móviles o nuevas serializaciones.
 
-Pendientes de la entrega humana: completar nombres/grupos/contribuciones y
-comprobar el acceso de la cuenta del profesor a GitHub, la release y HF privado.
+Pendientes de la entrega humana: confirmar letra A/B si es necesaria y comprobar
+el acceso de la cuenta del profesor a GitHub, la release y ambos repositorios HF privados.
 La prueba con la cuenta propietaria no demuestra acceso del docente. No se
 inventan usuarios ni se afirma que se enviaron invitaciones o la entrega.
 
 Texto de envío: `mensaje-profesor.txt` junto a los entregables. Completar campos
-personales y accesos antes de enviar por **un único canal** (Teams o correo).
+de acceso antes de enviar por **un único canal** (Teams o correo).
 '''
     Path('entrega.md').write_text(text)
     print(f'Informe {pages} páginas; entrega.md generado. PDF SHA256 {sha(root / "informe.pdf")}')

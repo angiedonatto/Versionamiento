@@ -1,7 +1,7 @@
 {
   "pages": 4,
-  "sha256": "00d5d4770ff1bfb704a3cb984074441cba1fdbcb5dd654070f9013c56a1b0a0d",
-  "generated_at_utc": "2026-10-31T01:58:01.251241+00:00",
+  "sha256": "14a4fd820a46ec3bf7eec621eeb1902ba663c79ae639aab248ee56088ea6b834",
+  "generated_at_utc": "2026-10-31T02:01:49.471863+00:00",
   "numeric_sources": [
     "auditoria.json",
     "experimentos.csv",
@@ -9,5 +9,13 @@
     "metricas-test.json",
     "recuperacion/resultado.json"
   ],
-  "method": "Cifras renderizadas directamente desde JSON/CSV; páginas comprobadas con pypdf."
+  "method": "Cifras renderizadas directamente desde JSON/CSV; páginas comprobadas con pypdf.",
+  "visual_review": {
+    "reviewed_at_utc": "2026-10-31T02:02:04.396022+00:00",
+    "pages_inspected": [
+      1,
+      4
+    ],
+    "result": "Portada con Angie Valentina Donato Pita, grupo por horario, contribución individual y ayuda IA declarada; cuatro páginas legibles."
+  }
 }

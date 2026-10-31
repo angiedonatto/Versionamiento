@@ -1,0 +1,15 @@
+{
+  "modalidad": "individual",
+  "integrantes": [
+    {
+      "nombre": "Angie Valentina Donato Pita",
+      "grupo": "Horario de 4:00 a 6:00 p. m.",
+      "horario": "16:00–18:00",
+      "codigo_grupo": null,
+      "contribucion": "Única integrante. La totalidad de la contribución estudiantil corresponde a Angie Valentina Donato Pita; no participaron otros integrantes."
+    }
+  ],
+  "declaracion_contribucion": "Trabajo individual de Angie Valentina Donato Pita, única integrante y responsable de la entrega académica. La contribución estudiantil se atribuye íntegramente a ella. Se declara por separado la asistencia de OpenAI Codex en la implementación, ejecución y documentación; no se oculta dicha ayuda.",
+  "grupo_observacion": "El horario fue indicado por la estudiante. No se infiere la letra A/B; queda por confirmar si el docente exige ese código.",
+  "confirmed_by_user_at_utc": "2026-10-31T02:01:32.535580+00:00"
+}

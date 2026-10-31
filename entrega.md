@@ -1,10 +1,10 @@
 # Índice de entrega — Defiende el servidor
 
-- Integrantes: **[NOMBRES COMPLETOS POR COMPLETAR]**.
-- Grupo de cada integrante: **[A/B POR COMPLETAR]**.
-- Contribución humana: **[CADA INTEGRANTE DEBE DECLARAR Y COMPRENDER SU APORTE]**.
+- Integrante única: **Angie Valentina Donato Pita**.
+- Grupo: **Horario de 4:00 a 6:00 p. m.**. Letra A/B no confirmada; no se inventa.
+- Contribución: Trabajo individual de Angie Valentina Donato Pita, única integrante y responsable de la entrega académica. La contribución estudiantil se atribuye íntegramente a ella. Se declara por separado la asistencia de OpenAI Codex en la implementación, ejecución y documentación; no se oculta dicha ayuda.
 - GitHub solicitado: https://github.com/angiedonatto/Versionamiento
-- Revisión base del paquete: `f3141d345f7f92ba34414e71521ccf68be6a7ca9`. El commit final de empaquetado se registra en `revision-entrega.txt` junto al ZIP y en el historial Git; no se inventa una autorreferencia de commit.
+- Revisión base del paquete: `465c3de39458a3e141081866c70aed99461706e9`. El commit final de empaquetado se registra en `revision-entrega.txt` junto al ZIP y en el historial Git; no se inventa una autorreferencia de commit.
 - Publicación GitHub: PUSH Y CLON REMOTO VERIFICADOS. El usuario autorizó publicar incluso si el repositorio es público; no se cambió su privacidad.
 - Acceso de la cuenta del docente: no comprobado; si el repositorio es privado, conceder lectura mediante invitación.
 - Historial sin dependencia de GitHub: `historial.bundle` dentro del ZIP; `git clone historial.bundle proyecto`.
@@ -56,7 +56,7 @@
 - **`dvc-storage.zip` se entrega aparte**. Extraer junto al proyecto: debe quedar `../dvc-storage`. `.dvc/config` configura remote `entrega`. Ejecutar `DVC_SITE_CACHE_DIR="$PWD/.runtime/dvc-site" dvc pull`.
 - Ubicación de los tres entregables: directorio de entrega `/workspace/entrega-defiende/` de esta tarea. No es un servicio público: descargar y adjuntar al canal del profesor, o compartir carpeta con permiso de lectura. Sin esa acción no se afirma acceso docente.
 - Distribución privada de archivos: https://huggingface.co/datasets/angiedonatto/defiende-el-servidor-entregables . El SHA inmutable de la entrega y los enlaces directos de descarga se guardan en `verificacion-publicacion.json`, junto a los archivos.
-- Índice GitHub previsto para la entrega final: https://github.com/angiedonatto/Versionamiento/releases/tag/entrega-verificada-2026-10-30 . Su publicación y los enlaces de archivos sólo se consideran comprobados cuando figuran en verificacion-publicacion.json. La carga binaria a uploads.github.com falló con HTTP 401; la alternativa HF privada requiere autorización para los archivos, sin tocar los modelos congelados.
+- Índice GitHub de entrega: https://github.com/angiedonatto/Versionamiento/releases/tag/entrega-verificada-2026-10-30 . Su publicación y los enlaces de archivos se comprueban en verificacion-publicacion.json. La carga binaria a uploads.github.com falló con HTTP 401; la estudiante autorizó expresamente distribuir los entregables en el destino HF privado separado, sin tocar los modelos congelados.
 - `auditoria-cumplimiento.md` y `.json` junto al ZIP: auditoría definitiva de los ocho requisitos y de cada componente de la rúbrica, incluidos pendientes administrativos.
 
 ## Ejecución medida y limitaciones
@@ -77,8 +77,9 @@ No se afirma prueba de lectura del docente sin conocer sus cuentas y conceder ac
 Se utilizó **OpenAI Codex** para leer los requisitos, implementar scripts, ejecutar
 comandos, diagnosticar dependencias, entrenar, comparar y generar documentos.
 Todas las cifras provienen de ejecuciones; lo bloqueado se informa como tal.
-El estudiante debe revisar, comprender y poder explicar el código y completar
-su contribución real. No se inventa nombre, grupo ni participación humana.
+Angie Valentina Donato Pita es la única integrante y contribuyente estudiantil,
+según su declaración. Es responsable de revisar, comprender y poder explicar
+la solución; la asistencia de Codex se mantiene explícitamente declarada.
 No se usaron soluciones docentes ni fragmentos adaptados de terceros; se usaron
 APIs de herramientas de código abierto, identificadas en requirements.txt.
 Datos de UNSW-NB15 con atribución y condiciones académicas de la fuente oficial.
@@ -100,10 +101,10 @@ HF_TOKEN debe ser propio o proporcionado por el entorno seguro y tener permiso
 de lectura del repositorio privado. Nunca entregar ni publicar credenciales.
 Los SHA evaluados no se sustituyen por main, tags móviles o nuevas serializaciones.
 
-Pendientes de la entrega humana: completar nombres/grupos/contribuciones y
-comprobar el acceso de la cuenta del profesor a GitHub, la release y HF privado.
+Pendientes de la entrega humana: confirmar letra A/B si es necesaria y comprobar
+el acceso de la cuenta del profesor a GitHub, la release y ambos repositorios HF privados.
 La prueba con la cuenta propietaria no demuestra acceso del docente. No se
 inventan usuarios ni se afirma que se enviaron invitaciones o la entrega.
 
 Texto de envío: `mensaje-profesor.txt` junto a los entregables. Completar campos
-personales y accesos antes de enviar por **un único canal** (Teams o correo).
+de acceso antes de enviar por **un único canal** (Teams o correo).

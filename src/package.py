@@ -44,13 +44,16 @@ def main():
     hf=read_json('evidencias/huggingface.json') if Path('evidencias/huggingface.json').exists() else {}
     recovery=read_json('evidencias/recuperacion/resultado.json')
     comparison=read_json('evidencias/recuperacion/comparacion.json')
+    people=read_json('configs/integrantes.json')
+    author='; '.join(p['nombre'] for p in people['integrantes'])
+    group='; '.join(p['grupo'] for p in people['integrantes'])
     assert recovery['passed'] and comparison['passed'], 'No empaquetar como recuperación completa sin prueba real'
     model_lines='\n'.join(f'{v}: {hf[v]["url"]}/tree/{hf[v]["sha"]}' if v in hf else f'{v}: PENDIENTE publicación HF por falta de token/acceso; no existe SHA verificable.' for v in ['v1','v2'])
-    text=f'''MLOps — Defiende el servidor — Grupo [A/B] — [Integrantes]
+    text=f'''MLOps — Defiende el servidor — {group} — {author}
 
 Profesor Julián:
 
-Integrantes y grupo por persona: [COMPLETAR NOMBRES COMPLETOS Y GRUPO].
+Integrante única: {author}. Grupo: {group} (letra A/B por confirmar).
 Comparto la implementación y evidencias ejecutadas del taller.
 Repositorio de código solicitado: https://github.com/angiedonatto/Versionamiento
 Commit final de esta entrega: {commit}
@@ -76,7 +79,9 @@ Limitaciones y uso de Codex están declarados en entrega.md e informe.pdf.
 Para repositorios privados, solicitaré su usuario GitHub y HF por este mismo
 canal y concederé lectura; no compartiré credenciales.
 
-[COMPLETAR CONTRIBUCIÓN REAL DE CADA INTEGRANTE Y ENLACES DE ACCESO]
+Contribución: {people['declaracion_contribucion']}
+Saludos,
+{author}
 '''
     (target/'mensaje-profesor.txt').write_text(text)
     manifest={'created_at_utc':now(),'git_commit':commit,'refs':refs,'files':{},
