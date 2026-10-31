@@ -1,5 +1,5 @@
 {
-  "recorded_at_utc": "2026-10-31T01:48:42.024844+00:00",
+  "recorded_at_utc": "2026-10-31T04:35:15.428857+00:00",
   "base_commit": "6eb9d2110cabcc8259973e1f4ac4a3a80aeccff9",
   "versions": {
     "v1": {
@@ -69,8 +69,8 @@
   "test_predictions_file_sha256": "a34c8820b678e57d3aeaef4c108ea84b1fc7e9ca85c128a6701f12a49570fe35",
   "hf_revision_containing_exact_evaluated_artifact": "9c8fd844aac0f3c04238a96dd7e43bd6b4fe7f27",
   "chronology": "Selección y test anteriores a publicación HF. Los SHA HF se añaden aquí porque los registros históricos originales tenían HF=null; el hash prueba identidad del mismo pipeline. No se retrofecha publicación ni se reevalúa test.",
-  "recovery_git_commit": "37a7b2ebe7551ad4f1c37f7ef4e5a4f726f7d2d9",
-  "recovery_log_sha256": "d1eb779448ae049e364f0648561579449ce97c91417a8cac594b8972bed5a100",
+  "recovery_git_commit": "e3c2310ef4aa1e44f7085715dc79d0d0a09b5b1a",
+  "recovery_log_sha256": "e57056f98e646a7ec747eb6c0717279fdcd06bf5cc017ebd6570512b0b99830f",
   "dvc_storage_zip_sha256": "4926e03e926a2b335a8ebf5618422114ddece32a46728ca1083eac697a0923e4",
   "all_immutable_files_unchanged": true
 }

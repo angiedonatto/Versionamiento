@@ -57,9 +57,9 @@ Integrante única: {author}. Grupo: {group}, confirmado.
 Comparto la implementación y evidencias ejecutadas del taller.
 Repositorio de código solicitado: https://github.com/angiedonatto/Versionamiento
 Commit final de esta entrega: {commit}
-La publicación se verifica con Git push y lectura remota; evidencia en github.json
-y verificacion-publicacion.json junto a estos archivos. El acceso de su cuenta
-debe comprobarse antes de enviar si el repositorio es privado.
+La publicación se verifica con Git push y lectura pública; evidencia en github.json
+y verificacion-publicacion.json junto a estos archivos. Los enlaces públicos
+permiten revisión sin compartir credenciales.
 Revisiones Git v1: {refs['v1']}; v2: {refs['v2']}.
 Modelos:
 {model_lines}
@@ -76,8 +76,8 @@ fijas reprodujeron clases exactas; diferencia máxima de scores en v1:
 Log y comparación en evidencias/recuperacion/; auditoría detallada adjunta.
 
 Limitaciones y uso de Codex están declarados en entrega.md e informe.pdf.
-Para repositorios privados, solicitaré su usuario GitHub y HF por este mismo
-canal y concederé lectura; no compartiré credenciales.
+Los repositorios y los entregables son públicos por autorización expresa;
+sus descargas sin token se verificaron. No se comparten credenciales.
 
 Contribución: {people['declaracion_contribucion']}
 Saludos,

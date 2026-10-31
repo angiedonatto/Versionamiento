@@ -1,7 +1,7 @@
 {
   "created_at_utc": "2026-10-31T01:26:28.225693+00:00",
   "published_to_hf": true,
-  "status": "Publicados en HF privado y recuperados por SHA con coincidencia exacta en 64 filas.",
+  "status": "Publicados en HF con visibilidad autorizada y recuperados por SHA con coincidencia exacta en 64 filas.",
   "versions": {
     "v1": {
       "pipeline_sha256": "379b81212257ce54700242b7568e75ba5cc76d444cd25101dc589494bd9d6f40",
@@ -32,6 +32,6 @@
       "private": true
     }
   },
-  "updated_at_utc": "2026-10-31T01:48:42.027843+00:00",
+  "updated_at_utc": "2026-10-31T04:35:15.431949+00:00",
   "hf_recovery_verified": true
 }

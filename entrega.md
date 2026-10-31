@@ -4,9 +4,9 @@
 - Grupo: **B**, confirmado por la estudiante.
 - Contribución: Trabajo individual de Angie Valentina Donato Pita, única integrante y responsable de la entrega académica. La contribución estudiantil se atribuye íntegramente a ella. Se declara por separado la asistencia de OpenAI Codex en la implementación, ejecución y documentación; no se oculta dicha ayuda.
 - GitHub solicitado: https://github.com/angiedonatto/Versionamiento
-- Revisión base del paquete: `dfa6443fbc0993afa195fa1764f2b56463f1163d`. El commit final de empaquetado se registra en `revision-entrega.txt` junto al ZIP y en el historial Git; no se inventa una autorreferencia de commit.
+- Revisión base del paquete: `e3c2310ef4aa1e44f7085715dc79d0d0a09b5b1a`. El commit final de empaquetado se registra en `revision-entrega.txt` junto al ZIP y en el historial Git; no se inventa una autorreferencia de commit.
 - Publicación GitHub: PUSH Y CLON REMOTO VERIFICADOS. El usuario autorizó publicar incluso si el repositorio es público; no se cambió su privacidad.
-- Acceso de la cuenta del docente: no comprobado; si el repositorio es privado, conceder lectura mediante invitación.
+- Acceso: repositorios públicos autorizados; se documentan comprobaciones de lectura sin token. No se afirma haber iniciado sesión con la cuenta del docente ni enviado invitaciones.
 - Historial sin dependencia de GitHub: `historial.bundle` dentro del ZIP; `git clone historial.bundle proyecto`.
 
 ## Trazabilidad por versión
@@ -21,7 +21,7 @@
 - Familia: LogisticRegression; parámetros: `{'C': 0.1, 'max_iter': 1000, 'solver': 'liblinear'}`.
 - Umbral: `0.5`; ataque si score >= umbral.
 - Modelo SHA256: `379b81212257ce54700242b7568e75ba5cc76d444cd25101dc589494bd9d6f40`.
-- HF: https://huggingface.co/angiedonatto/defiende-el-servidor/tree/989ec48decb0f32dfc4ae448389e813bc0fc38c2 (privado; SHA completo `989ec48decb0f32dfc4ae448389e813bc0fc38c2`)
+- HF: https://huggingface.co/angiedonatto/defiende-el-servidor/tree/989ec48decb0f32dfc4ae448389e813bc0fc38c2 (público, autorizado; SHA completo `989ec48decb0f32dfc4ae448389e813bc0fc38c2`)
 
 ### v2
 
@@ -33,7 +33,7 @@
 - Familia: DecisionTreeClassifier; parámetros: `{'max_depth': 16, 'min_samples_leaf': 5}`.
 - Umbral: `0.5`; ataque si score >= umbral.
 - Modelo SHA256: `a2d7aebf559a8393bb55a3ad80f698d1777bfe971eed850f463bbc6d96cdc95c`.
-- HF: https://huggingface.co/angiedonatto/defiende-el-servidor/tree/9c8fd844aac0f3c04238a96dd7e43bd6b4fe7f27 (privado; SHA completo `9c8fd844aac0f3c04238a96dd7e43bd6b4fe7f27`)
+- HF: https://huggingface.co/angiedonatto/defiende-el-servidor/tree/9c8fd844aac0f3c04238a96dd7e43bd6b4fe7f27 (público, autorizado; SHA completo `9c8fd844aac0f3c04238a96dd7e43bd6b4fe7f27`)
 
 ## Evidencias y almacenamiento
 
@@ -55,13 +55,13 @@
 - `informe.pdf`: máximo cinco páginas; generado desde evidencia real.
 - **`dvc-storage.zip` se entrega aparte**. Extraer junto al proyecto: debe quedar `../dvc-storage`. `.dvc/config` configura remote `entrega`. Ejecutar `DVC_SITE_CACHE_DIR="$PWD/.runtime/dvc-site" dvc pull`.
 - Ubicación de los tres entregables: directorio de entrega `/workspace/entrega-defiende/` de esta tarea. No es un servicio público: descargar y adjuntar al canal del profesor, o compartir carpeta con permiso de lectura. Sin esa acción no se afirma acceso docente.
-- Distribución privada de archivos: https://huggingface.co/datasets/angiedonatto/defiende-el-servidor-entregables . El SHA inmutable de la entrega y los enlaces directos de descarga se guardan en `verificacion-publicacion.json`, junto a los archivos.
-- Índice GitHub de entrega: https://github.com/angiedonatto/Versionamiento/releases/tag/entrega-grupo-b-2026-10-30 . Esta revisión corrige únicamente la identificación del grupo; conserva las publicaciones anteriores. Su publicación y los enlaces de archivos se comprueban en verificacion-publicacion.json. Se usa el destino HF privado autorizado, sin tocar los modelos congelados.
+- Distribución pública autorizada de archivos: https://huggingface.co/datasets/angiedonatto/defiende-el-servidor-entregables . El SHA inmutable de la entrega y los enlaces directos de descarga se guardan en `verificacion-publicacion.json`, junto a los archivos.
+- Índice GitHub de entrega: https://github.com/angiedonatto/Versionamiento/releases/tag/entrega-grupo-b-2026-10-30 . Esta revisión confirma grupo B y documenta la visibilidad pública autorizada; conserva versiones anteriores, sin tocar modelos congelados.
 - `auditoria-cumplimiento.md` y `.json` junto al ZIP: auditoría definitiva de los ocho requisitos y de cada componente de la rúbrica, incluidos pendientes administrativos.
 
 ## Ejecución medida y limitaciones
 
-Python 3.12.14, Linux x86_64, 5 CPU visibles. Tiempos de fit+validación+serialización: lr_c01=3.131s, lr_c10=15.703s, tree_d08=2.519s, tree_d16=5.054s. Auditoría=10.593s. Recuperación=57.112014585s. Máximo RSS por proceso en run.json. Sin GPU ni muestreo.
+Python 3.12.14, Linux x86_64, 5 CPU visibles. Tiempos de fit+validación+serialización: lr_c01=3.131s, lr_c10=15.703s, tree_d08=2.519s, tree_d16=5.054s. Auditoría=10.593s. Recuperación=46.169171654999445s. Máximo RSS por proceso en run.json. Sin GPU ni muestreo.
 
 Recuperación DVC comprobada: True; recuperación HF completa: True. Log: `evidencias/recuperacion/recuperacion.log`. Bloqueo: ninguno registrado.
 
@@ -97,12 +97,12 @@ python -m src.lifecycle recompute
 python -m src.verify
 ```
 
-HF_TOKEN debe ser propio o proporcionado por el entorno seguro y tener permiso
-de lectura del repositorio privado. Nunca entregar ni publicar credenciales.
+La lectura pública de HF no requiere token; las escrituras sí usan autenticación
+segura. Nunca entregar ni publicar credenciales.
 Los SHA evaluados no se sustituyen por main, tags móviles o nuevas serializaciones.
 
-Pendiente de la entrega humana: comprobar el acceso de la cuenta del profesor
-a GitHub, la release y ambos repositorios HF privados. El grupo B ya está confirmado.
+El grupo B ya está confirmado. Las lecturas públicas de HF y GitHub se comprueban
+sin token, sin exigir credenciales del docente ni inventar invitaciones.
 La prueba con la cuenta propietaria no demuestra acceso del docente. No se
 inventan usuarios ni se afirma que se enviaron invitaciones o la entrega.
 

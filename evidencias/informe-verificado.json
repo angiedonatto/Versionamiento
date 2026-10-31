@@ -1,7 +1,7 @@
 {
   "pages": 4,
-  "sha256": "1b29a9befb744cd03a031f46b8edd08a58e4bb9b2ece82cde6873169a45862c9",
-  "generated_at_utc": "2026-10-31T03:54:02.953623+00:00",
+  "sha256": "3c54b498ba1e058abb496e4ab783f32a75cb58e2b3e858a42042f1727aa7fe5e",
+  "generated_at_utc": "2026-10-31T04:35:18.470785+00:00",
   "numeric_sources": [
     "auditoria.json",
     "experimentos.csv",

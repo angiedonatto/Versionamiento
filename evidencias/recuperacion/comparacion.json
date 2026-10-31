@@ -8,8 +8,9 @@
       "sha": "989ec48decb0f32dfc4ae448389e813bc0fc38c2",
       "model_sha256": "379b81212257ce54700242b7568e75ba5cc76d444cd25101dc589494bd9d6f40",
       "downloaded_from_hf": true,
-      "private": true,
-      "snapshot_path": "/tmp/defiende-recuperacion-lf9oj3ef/hf-cache/models--angiedonatto--defiende-el-servidor/snapshots/989ec48decb0f32dfc4ae448389e813bc0fc38c2",
+      "private": false,
+      "sdk_authentication_disabled": true,
+      "snapshot_path": "/tmp/defiende-recuperacion-q3xbakq7/hf-cache/models--angiedonatto--defiende-el-servidor/snapshots/989ec48decb0f32dfc4ae448389e813bc0fc38c2",
       "threshold": 0.5,
       "mlflow_run_id": "dbabc72d10584079894a1d4829fb4ddc",
       "git_commit": "91b68ca202873d828a21f627473a61eee632d872",
@@ -28,8 +29,9 @@
       "sha": "9c8fd844aac0f3c04238a96dd7e43bd6b4fe7f27",
       "model_sha256": "a2d7aebf559a8393bb55a3ad80f698d1777bfe971eed850f463bbc6d96cdc95c",
       "downloaded_from_hf": true,
-      "private": true,
-      "snapshot_path": "/tmp/defiende-recuperacion-lf9oj3ef/hf-cache/models--angiedonatto--defiende-el-servidor/snapshots/9c8fd844aac0f3c04238a96dd7e43bd6b4fe7f27",
+      "private": false,
+      "sdk_authentication_disabled": true,
+      "snapshot_path": "/tmp/defiende-recuperacion-q3xbakq7/hf-cache/models--angiedonatto--defiende-el-servidor/snapshots/9c8fd844aac0f3c04238a96dd7e43bd6b4fe7f27",
       "threshold": 0.5,
       "mlflow_run_id": "d5002ef5f9544389ab3597c526771740",
       "git_commit": "d7e3d35b724fc5828a79cdd68200fc560194a54d",
@@ -45,6 +47,6 @@
       "after_sha256": "24d7f23d440fa45f53925e2d6be96aa815a68f11102a5ba03a47ce888f0ecded"
     }
   },
-  "verified_at_utc": "2026-10-31T01:47:54.133552+00:00",
-  "hf_cache_path": "/tmp/defiende-recuperacion-lf9oj3ef/hf-cache"
+  "verified_at_utc": "2026-10-31T04:35:05.628233+00:00",
+  "hf_cache_path": "/tmp/defiende-recuperacion-q3xbakq7/hf-cache"
 }
