@@ -1,0 +1,22 @@
+{
+  "base_commit": "6eb9d2110cabcc8259973e1f4ac4a3a80aeccff9",
+  "recorded_at_utc": "2026-10-31T01:45:29.444611+00:00",
+  "immutable_files": {
+    "evidencias/seleccion.json": "f976737cc47b07699d5e0e2e3a751fde56315b763b63e02601e7c9a16f22eabc",
+    "evidencias/metricas-test.json": "900ba37dddeac34a7d911ba1edf2ad242a61a0b5ab016eae43f695d3a5f797cb",
+    "evidencias/predicciones-test.csv": "a34c8820b678e57d3aeaef4c108ea84b1fc7e9ca85c128a6701f12a49570fe35",
+    "evidencias/test-iniciado.json": "45ce6c3f5f227f6f10aff03ccc00028e1f440586821a491dd841b49239b5677c",
+    "evidencias/recuperacion/muestra-validation.csv": "96b7bc31927f42cdedda83bf23524b13f334d6e53948d7e25e3e3d76cfcf36ca",
+    "evidencias/recuperacion/v1-antes.csv": "ca0a48b3c9c7bb913bb502f747b91e58c73c56d7fa4786f28dec41dea7b6f110",
+    "evidencias/recuperacion/v2-antes.csv": "24d7f23d440fa45f53925e2d6be96aa815a68f11102a5ba03a47ce888f0ecded",
+    "evidencias/v1.json": "184f387fec90c513824d3b4f7970cbaeab0b3057bf97b7f266cd8c39d1f53890",
+    "evidencias/v2.json": "3029e1253a2ddf5ac4884c22d454491066deb4fce3db28f76d6f385e09685abc",
+    "evidencias/experimentos.csv": "a468cb82110a3d98cad6f89d3a0d213b41e178054e6f8d1f5a251edd9f6192c4",
+    "data/raw.dvc": "aef69f0eb635b870b7d72e66e9ebdc27c29ad9f22df065bb6405aa6db29d6870",
+    "data/processed.dvc": "8a3465fc54393b03148751c2c1db1422ca8c1ed48adb307fac757d16eade75a6",
+    "evidencias/modelos/v1/pipeline.joblib": "379b81212257ce54700242b7568e75ba5cc76d444cd25101dc589494bd9d6f40",
+    "evidencias/modelos/v2/pipeline.joblib": "a2d7aebf559a8393bb55a3ad80f698d1777bfe971eed850f463bbc6d96cdc95c"
+  },
+  "test_original_evaluated_at": "2026-10-31T01:23:13.793951+00:00",
+  "policy": "No fit, no reevaluacion test, no cambio de seleccion, umbral ni pipeline."
+}

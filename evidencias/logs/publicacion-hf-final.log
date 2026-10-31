@@ -1,0 +1,11 @@
+
+[2026-10-31T01:45:33.530547+00:00] cwd=/workspace/Versionamiento
+$ /workspace/defiende-venv/bin/python -m src.lifecycle publish --repo angiedonatto/defiende-el-servidor
+
+pipeline.joblib:   0%|          | 0.00/5.51k [00:00<?, ?B/s]
+pipeline.joblib: 100%|██████████| 5.51k/5.51k [00:00<00:00, 20.0kB/s]
+
+pipeline.joblib:   0%|          | 0.00/53.6k [00:00<?, ?B/s]
+pipeline.joblib: 100%|██████████| 53.6k/53.6k [00:00<00:00, 371kB/s]
+{'v1': {'repo_id': 'angiedonatto/defiende-el-servidor', 'url': 'https://huggingface.co/angiedonatto/defiende-el-servidor', 'sha': '989ec48decb0f32dfc4ae448389e813bc0fc38c2', 'model_sha256': '379b81212257ce54700242b7568e75ba5cc76d444cd25101dc589494bd9d6f40', 'published_at_utc': '2026-10-31T01:45:36.462968+00:00', 'private': True}, 'v2': {'repo_id': 'angiedonatto/defiende-el-servidor', 'url': 'https://huggingface.co/angiedonatto/defiende-el-servidor', 'sha': '9c8fd844aac0f3c04238a96dd7e43bd6b4fe7f27', 'model_sha256': 'a2d7aebf559a8393bb55a3ad80f698d1777bfe971eed850f463bbc6d96cdc95c', 'published_at_utc': '2026-10-31T01:45:37.842538+00:00', 'private': True}}
+{"command": ["/workspace/defiende-venv/bin/python", "-m", "src.lifecycle", "publish", "--repo", "angiedonatto/defiende-el-servidor"], "started_at_utc": "2026-10-31T01:45:33.530547+00:00", "finished_at_utc": "2026-10-31T01:45:38.292472+00:00", "elapsed_seconds": 4.76193753299998, "exit_code": 0}

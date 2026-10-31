@@ -1,7 +1,7 @@
 {
   "created_at_utc": "2026-10-31T01:26:28.225693+00:00",
-  "published_to_hf": false,
-  "status": "Bundles completos preparados localmente. No tienen SHA remoto HF; publicación bloqueada por token faltante.",
+  "published_to_hf": true,
+  "status": "Ambas revisiones publicadas en repositorio privado; recuperación limpia en curso.",
   "versions": {
     "v1": {
       "pipeline_sha256": "379b81212257ce54700242b7568e75ba5cc76d444cd25101dc589494bd9d6f40",
@@ -13,5 +13,24 @@
       "config_sha256": "3029e1253a2ddf5ac4884c22d454491066deb4fce3db28f76d6f385e09685abc",
       "model_card_sha256": "a686cac64157d1b100f22255e2420f9c687f10328e90759817fa4ce3dfeb6cfe"
     }
-  }
+  },
+  "publication": {
+    "v1": {
+      "repo_id": "angiedonatto/defiende-el-servidor",
+      "url": "https://huggingface.co/angiedonatto/defiende-el-servidor",
+      "sha": "989ec48decb0f32dfc4ae448389e813bc0fc38c2",
+      "model_sha256": "379b81212257ce54700242b7568e75ba5cc76d444cd25101dc589494bd9d6f40",
+      "published_at_utc": "2026-10-31T01:45:36.462968+00:00",
+      "private": true
+    },
+    "v2": {
+      "repo_id": "angiedonatto/defiende-el-servidor",
+      "url": "https://huggingface.co/angiedonatto/defiende-el-servidor",
+      "sha": "9c8fd844aac0f3c04238a96dd7e43bd6b4fe7f27",
+      "model_sha256": "a2d7aebf559a8393bb55a3ad80f698d1777bfe971eed850f463bbc6d96cdc95c",
+      "published_at_utc": "2026-10-31T01:45:37.842538+00:00",
+      "private": true
+    }
+  },
+  "updated_at_utc": "2026-10-31T01:46:15.360135+00:00"
 }

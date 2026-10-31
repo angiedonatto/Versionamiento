@@ -18,12 +18,13 @@ def main():
     parser.add_argument('--storage', required=True)
     parser.add_argument('--git-source', default='.')
     parser.add_argument('--revision', default='HEAD')
+    parser.add_argument('--work-root', default=None, help='Directorio temporal padre opcional; por defecto el temporal del sistema.')
     parser.add_argument('--skip-install', action='store_true', help='Sólo para diagnóstico; no se considera recuperación completa.')
     args = parser.parse_args()
     origin = Path.cwd()
     out = origin / 'evidencias/recuperacion'
     out.mkdir(parents=True, exist_ok=True)
-    root = Path(tempfile.mkdtemp(prefix='defiende-recuperacion-', dir='/workspace'))
+    root = Path(tempfile.mkdtemp(prefix='defiende-recuperacion-', dir=args.work_root))
     log_path = out / 'recuperacion.log'
     env = os.environ.copy()
     env.update({'DVC_SITE_CACHE_DIR': str(root / 'dvc-site-new'), 'HF_HOME': str(root / 'hf-home'), 'HF_HUB_CACHE': str(root / 'hf-cache'),
@@ -33,7 +34,11 @@ def main():
                 'OPENBLAS_NUM_THREADS':'2', 'OMP_NUM_THREADS':'2'})
     result = {'started_at_utc': now(), 'root': str(root), 'git_source': args.git_source,
               'requested_revision': args.revision, 'steps': [], 'passed': False,
-              'new_venv': True, 'original_caches_reused': False, 'score_tolerance': 1e-12}
+              'new_venv': True, 'original_caches_reused': False, 'score_tolerance': 1e-12,
+              'storage_zip_sha256': sha(args.storage),
+              'cache_paths': {k: env[k] for k in ['HF_HOME','HF_HUB_CACHE','XDG_CACHE_HOME','DVC_SITE_CACHE_DIR']},
+              'caches_absent_before_start': all(not Path(env[k]).exists() for k in ['HF_HOME','HF_HUB_CACHE','XDG_CACHE_HOME','DVC_SITE_CACHE_DIR'])}
+    assert result['caches_absent_before_start']
     start = time.perf_counter()
     with log_path.open('w') as log:
         def run(cmd, cwd=root, required=True):

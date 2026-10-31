@@ -1,0 +1,23 @@
+{
+  "selection_sha256": "f976737cc47b07699d5e0e2e3a751fde56315b763b63e02601e7c9a16f22eabc",
+  "huggingface": {
+    "v1": {
+      "repo_id": "angiedonatto/defiende-el-servidor",
+      "url": "https://huggingface.co/angiedonatto/defiende-el-servidor",
+      "sha": "989ec48decb0f32dfc4ae448389e813bc0fc38c2",
+      "model_sha256": "379b81212257ce54700242b7568e75ba5cc76d444cd25101dc589494bd9d6f40",
+      "published_at_utc": "2026-10-31T01:45:36.462968+00:00",
+      "private": true
+    },
+    "v2": {
+      "repo_id": "angiedonatto/defiende-el-servidor",
+      "url": "https://huggingface.co/angiedonatto/defiende-el-servidor",
+      "sha": "9c8fd844aac0f3c04238a96dd7e43bd6b4fe7f27",
+      "model_sha256": "a2d7aebf559a8393bb55a3ad80f698d1777bfe971eed850f463bbc6d96cdc95c",
+      "published_at_utc": "2026-10-31T01:45:37.842538+00:00",
+      "private": true
+    }
+  },
+  "recorded_at_utc": "2026-10-31T01:45:38.121237+00:00",
+  "git_commit": "6eb9d2110cabcc8259973e1f4ac4a3a80aeccff9"
+}
