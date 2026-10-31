@@ -49,7 +49,7 @@ def main():
         story.append(Spacer(1,8))
     p('Defiende el servidor', 'Title')
     p('Informe académico MLOps · evidencia ejecutada, sin garantía de eficacia operacional')
-    p(f'Integrante: {author}. Modalidad: individual. Grupo: {group}. Letra A/B no confirmada; no se infiere del horario.')
+    p(f'Integrante: {author}. Modalidad: individual. Grupo: {group}, confirmado por la estudiante.')
     heading('1. Datos, procedencia y auditoría')
     p('UNSW-NB15: se descargaron las dos particiones académicas desde el mirror inmutable enlazado en el PDF del profesor. Los SHA-256 coinciden exactamente con el anexo. Fecha UTC de descarga: 31 octubre 2026 (30 octubre en Bogotá). El mirror no constituye autenticación frente al archivo oficial UNSW.')
     rows = [['Partición','Filas','Columnas','Normal / ataque','Duplicados extra','Grupos contradict.']]
@@ -106,7 +106,7 @@ def main():
         p(f'Comprobación suplementaria desde el checkout nuevo y venv nuevo (fuente Git local, NO HF): {local["rows"]} filas, clases idénticas en v1/v2; diferencias máximas de scores {local["versions"]["v1"]["max_score_difference"]} y {local["versions"]["v2"]["max_score_difference"]}. Log: local-suplementaria-limpia.log. Esto no aprueba la recuperación exigida desde HF.')
     p(f'Recursos medidos: Linux {platform.machine()}, Python {platform.python_version()}, {os.cpu_count()} CPU visibles; límite de threads BLAS=2 en fit. Máximo RSS reportado por proceso de entrenamiento: {max(table.apply(lambda r: read_json(f"evidencias/mlflow/{r.mlflow_run_id}/run.json")["max_rss_kib_process"],axis=1))/1024:.1f} MiB (acumulado del proceso, no pico incremental por modelo). Tiempos individuales en experimentos.csv; auditoría {audit["elapsed_seconds"]:.3f} s.')
     p('GitHub: ' + ('push y lectura desde un clon remoto nuevos comprobados. El usuario autorizó publicar incluso si el repositorio es público. El acceso de la cuenta del docente no se ha comprobado.' if github.get('read_verified') else 'publicación/acceso NO comprobado; consultar los bloqueos de acceso. El historial local recuperable se entrega en bundle.'))
-    p('La finalización no volvió a entrenar ni a evaluar test. La publicación HF es posterior al test original; trazabilidad-final.json une sus SHA con el hash del mismo pipeline, sin alterar selección ni resultados. Pendiente: acceso del docente a los repositorios privados y letra A/B si se exige.')
+    p('La finalización no volvió a entrenar ni a evaluar test. La publicación HF es posterior al test original; trazabilidad-final.json une sus SHA con el hash del mismo pipeline, sin alterar selección ni resultados. Pendiente: acceso del docente a los repositorios privados.')
     p('Contribuciones: '+people['declaracion_contribucion']+' Codex asistió con descarga, auditoría, código, entrenamiento, trazabilidad y documentos, comprobados con logs. La integrante es responsable de revisar y comprender la solución. No se adaptaron soluciones docentes; dependencias en requirements.txt y datos atribuidos a UNSW.')
     p('Fuentes: PDF del profesor (16-10-2026); research.unsw.edu.au/projects/unsw-nb15-dataset; mirror Nir-J/ML-Projects commit 44bbd02b9e70f74dd915218d5eb702f125341ffc; git-scm.com/doc; doc.dvc.org/start; mlflow.org/docs/latest/ml/tracking; huggingface.co/docs/huggingface_hub/guides/download; scikit-learn.org/stable/common_pitfalls.html.')
     doc=SimpleDocTemplate(str(root / 'informe.pdf'),pagesize=A4,rightMargin=50,leftMargin=50,topMargin=38,bottomMargin=38)
@@ -123,7 +123,7 @@ def main():
     text=f'''# Índice de entrega — Defiende el servidor
 
 - Integrante única: **{author}**.
-- Grupo: **{group}**. Letra A/B no confirmada; no se inventa.
+- Grupo: **{group}**, confirmado por la estudiante.
 - Contribución: {people['declaracion_contribucion']}
 - GitHub solicitado: https://github.com/angiedonatto/Versionamiento
 - Revisión base del paquete: `{final}`. El commit final de empaquetado se registra en `revision-entrega.txt` junto al ZIP y en el historial Git; no se inventa una autorreferencia de commit.
@@ -157,7 +157,7 @@ def main():
 - **`dvc-storage.zip` se entrega aparte**. Extraer junto al proyecto: debe quedar `../dvc-storage`. `.dvc/config` configura remote `entrega`. Ejecutar `DVC_SITE_CACHE_DIR="$PWD/.runtime/dvc-site" dvc pull`.
 - Ubicación de los tres entregables: directorio de entrega `/workspace/entrega-defiende/` de esta tarea. No es un servicio público: descargar y adjuntar al canal del profesor, o compartir carpeta con permiso de lectura. Sin esa acción no se afirma acceso docente.
 - Distribución privada de archivos: https://huggingface.co/datasets/angiedonatto/defiende-el-servidor-entregables . El SHA inmutable de la entrega y los enlaces directos de descarga se guardan en `verificacion-publicacion.json`, junto a los archivos.
-- Índice GitHub de entrega: https://github.com/angiedonatto/Versionamiento/releases/tag/entrega-verificada-2026-10-30 . Su publicación y los enlaces de archivos se comprueban en verificacion-publicacion.json. La carga binaria a uploads.github.com falló con HTTP 401; la estudiante autorizó expresamente distribuir los entregables en el destino HF privado separado, sin tocar los modelos congelados.
+- Índice GitHub de entrega: https://github.com/angiedonatto/Versionamiento/releases/tag/entrega-grupo-b-2026-10-30 . Esta revisión corrige únicamente la identificación del grupo; conserva las publicaciones anteriores. Su publicación y los enlaces de archivos se comprueban en verificacion-publicacion.json. Se usa el destino HF privado autorizado, sin tocar los modelos congelados.
 - `auditoria-cumplimiento.md` y `.json` junto al ZIP: auditoría definitiva de los ocho requisitos y de cada componente de la rúbrica, incluidos pendientes administrativos.
 
 ## Ejecución medida y limitaciones
@@ -203,8 +203,8 @@ HF_TOKEN debe ser propio o proporcionado por el entorno seguro y tener permiso
 de lectura del repositorio privado. Nunca entregar ni publicar credenciales.
 Los SHA evaluados no se sustituyen por main, tags móviles o nuevas serializaciones.
 
-Pendientes de la entrega humana: confirmar letra A/B si es necesaria y comprobar
-el acceso de la cuenta del profesor a GitHub, la release y ambos repositorios HF privados.
+Pendiente de la entrega humana: comprobar el acceso de la cuenta del profesor
+a GitHub, la release y ambos repositorios HF privados. El grupo B ya está confirmado.
 La prueba con la cuenta propietaria no demuestra acceso del docente. No se
 inventan usuarios ni se afirma que se enviaron invitaciones o la entrega.
 

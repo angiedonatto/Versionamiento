@@ -1,10 +1,10 @@
 # Índice de entrega — Defiende el servidor
 
 - Integrante única: **Angie Valentina Donato Pita**.
-- Grupo: **Horario de 4:00 a 6:00 p. m.**. Letra A/B no confirmada; no se inventa.
+- Grupo: **B**, confirmado por la estudiante.
 - Contribución: Trabajo individual de Angie Valentina Donato Pita, única integrante y responsable de la entrega académica. La contribución estudiantil se atribuye íntegramente a ella. Se declara por separado la asistencia de OpenAI Codex en la implementación, ejecución y documentación; no se oculta dicha ayuda.
 - GitHub solicitado: https://github.com/angiedonatto/Versionamiento
-- Revisión base del paquete: `465c3de39458a3e141081866c70aed99461706e9`. El commit final de empaquetado se registra en `revision-entrega.txt` junto al ZIP y en el historial Git; no se inventa una autorreferencia de commit.
+- Revisión base del paquete: `dfa6443fbc0993afa195fa1764f2b56463f1163d`. El commit final de empaquetado se registra en `revision-entrega.txt` junto al ZIP y en el historial Git; no se inventa una autorreferencia de commit.
 - Publicación GitHub: PUSH Y CLON REMOTO VERIFICADOS. El usuario autorizó publicar incluso si el repositorio es público; no se cambió su privacidad.
 - Acceso de la cuenta del docente: no comprobado; si el repositorio es privado, conceder lectura mediante invitación.
 - Historial sin dependencia de GitHub: `historial.bundle` dentro del ZIP; `git clone historial.bundle proyecto`.
@@ -56,7 +56,7 @@
 - **`dvc-storage.zip` se entrega aparte**. Extraer junto al proyecto: debe quedar `../dvc-storage`. `.dvc/config` configura remote `entrega`. Ejecutar `DVC_SITE_CACHE_DIR="$PWD/.runtime/dvc-site" dvc pull`.
 - Ubicación de los tres entregables: directorio de entrega `/workspace/entrega-defiende/` de esta tarea. No es un servicio público: descargar y adjuntar al canal del profesor, o compartir carpeta con permiso de lectura. Sin esa acción no se afirma acceso docente.
 - Distribución privada de archivos: https://huggingface.co/datasets/angiedonatto/defiende-el-servidor-entregables . El SHA inmutable de la entrega y los enlaces directos de descarga se guardan en `verificacion-publicacion.json`, junto a los archivos.
-- Índice GitHub de entrega: https://github.com/angiedonatto/Versionamiento/releases/tag/entrega-verificada-2026-10-30 . Su publicación y los enlaces de archivos se comprueban en verificacion-publicacion.json. La carga binaria a uploads.github.com falló con HTTP 401; la estudiante autorizó expresamente distribuir los entregables en el destino HF privado separado, sin tocar los modelos congelados.
+- Índice GitHub de entrega: https://github.com/angiedonatto/Versionamiento/releases/tag/entrega-grupo-b-2026-10-30 . Esta revisión corrige únicamente la identificación del grupo; conserva las publicaciones anteriores. Su publicación y los enlaces de archivos se comprueban en verificacion-publicacion.json. Se usa el destino HF privado autorizado, sin tocar los modelos congelados.
 - `auditoria-cumplimiento.md` y `.json` junto al ZIP: auditoría definitiva de los ocho requisitos y de cada componente de la rúbrica, incluidos pendientes administrativos.
 
 ## Ejecución medida y limitaciones
@@ -101,8 +101,8 @@ HF_TOKEN debe ser propio o proporcionado por el entorno seguro y tener permiso
 de lectura del repositorio privado. Nunca entregar ni publicar credenciales.
 Los SHA evaluados no se sustituyen por main, tags móviles o nuevas serializaciones.
 
-Pendientes de la entrega humana: confirmar letra A/B si es necesaria y comprobar
-el acceso de la cuenta del profesor a GitHub, la release y ambos repositorios HF privados.
+Pendiente de la entrega humana: comprobar el acceso de la cuenta del profesor
+a GitHub, la release y ambos repositorios HF privados. El grupo B ya está confirmado.
 La prueba con la cuenta propietaria no demuestra acceso del docente. No se
 inventan usuarios ni se afirma que se enviaron invitaciones o la entrega.
 

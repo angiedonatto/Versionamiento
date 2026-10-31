@@ -1,0 +1,19 @@
+{
+  "recorded_at_utc": "2026-10-31T03:54:04.217104+00:00",
+  "group": "B",
+  "confirmed_by_user": true,
+  "change": "Identificación del grupo en documentos y metadatos; sin cambios científicos.",
+  "previous_scientifically_verified_commit": "dfa6443fbc0993afa195fa1764f2b56463f1163d",
+  "scientific_runtime_files_unchanged": {
+    "src/common.py": "4b9d43aa1733e4742844bd77e38cba48eda3c548b58a6007716f6138fc5827b8",
+    "src/train.py": "a71300467a8b144f385748d88999119893b186327d44f2627e12ac133ce878f5",
+    "src/lifecycle.py": "39450d23a0535513bcf7e605c809bf309e41a19650acfd7aaa859e4cf182d59e",
+    "src/recover.py": "7bb4220e6ee2c683587766a632d539abd944be3b71231d165697764d3ca2edb7",
+    "src/recovery_check.py": "6eba92fb859a66f0b4b7cfe29733a1a1144fca3c38d66ba62c859aaa85b900ad",
+    "src/download_model.py": "745874fad3fbb01ca8ee13a59f4f7fb1d796d06081ce41467e6be527897dd3cf",
+    "requirements.txt": "e673e10713e24f659813093635b4272d7040d2481809670b3535c0d6bc5fbcd0"
+  },
+  "frozen_artifacts_unchanged": true,
+  "training_repeated": false,
+  "test_evaluation_repeated": false
+}

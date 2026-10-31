@@ -49,11 +49,11 @@ def main():
     group='; '.join(p['grupo'] for p in people['integrantes'])
     assert recovery['passed'] and comparison['passed'], 'No empaquetar como recuperación completa sin prueba real'
     model_lines='\n'.join(f'{v}: {hf[v]["url"]}/tree/{hf[v]["sha"]}' if v in hf else f'{v}: PENDIENTE publicación HF por falta de token/acceso; no existe SHA verificable.' for v in ['v1','v2'])
-    text=f'''MLOps — Defiende el servidor — {group} — {author}
+    text=f'''MLOps — Defiende el servidor — Grupo {group} — {author}
 
 Profesor Julián:
 
-Integrante única: {author}. Grupo: {group} (letra A/B por confirmar).
+Integrante única: {author}. Grupo: {group}, confirmado.
 Comparto la implementación y evidencias ejecutadas del taller.
 Repositorio de código solicitado: https://github.com/angiedonatto/Versionamiento
 Commit final de esta entrega: {commit}
