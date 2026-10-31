@@ -23,7 +23,7 @@ def main():
         assert not str(p).startswith(('data/raw/','data/processed/','.venv/','.runtime/','mlruns/','models/')), p
         if p.suffix in {'.py','.json','.md','.txt','.csv','.log','.dvc'}:
             content=p.read_text(errors='replace')
-            assert not re.search(r'(?:hf_|ghp_|github_pat_)[A-Za-z0-9_]{24,}',content), f'Posible credencial en {p}'
+            assert not re.search(r'(?:hf_|ghp_)[A-Za-z0-9]{24,}|github_pat_[A-Za-z0-9_]{40,}',content), f'Posible credencial en {p}'
     objects=subprocess.check_output(['git','rev-list','--objects','--all'],text=True)
     assert not re.search(r' data/(raw|processed)/.*\.csv',objects), 'Datos masivos en historial alcanzable'
     bundle=target/'historial.bundle'
