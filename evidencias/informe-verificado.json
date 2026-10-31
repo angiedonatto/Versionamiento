@@ -1,7 +1,7 @@
 {
   "pages": 4,
-  "sha256": "19b51c50361f70e117d8dd6757d56c205514dbafd52e346789f826692b1981bf",
-  "generated_at_utc": "2026-10-31T01:50:55.848026+00:00",
+  "sha256": "2405dc3ba56cab5e986ac60a40f3dc17470fa56672f8d12823549ba4a150805e",
+  "generated_at_utc": "2026-10-31T01:55:18.901583+00:00",
   "numeric_sources": [
     "auditoria.json",
     "experimentos.csv",
@@ -11,11 +11,11 @@
   ],
   "method": "Cifras renderizadas directamente desde JSON/CSV; páginas comprobadas con pypdf.",
   "visual_review": {
-    "reviewed_at_utc": "2026-10-31T01:51:29.933520+00:00",
+    "reviewed_at_utc": "2026-10-31T01:55:20.127031+00:00",
     "pages_inspected": [
       3,
       4
     ],
-    "result": "Tablas legibles, fuentes incrustadas, métricas y SHAs dentro de márgenes; flechas sustituidas por texto compatible."
+    "result": "Mismo PDF numérico y disposición revisados; actualización de enlaces afecta entrega.md, no las cifras. Cuatro páginas."
   }
 }

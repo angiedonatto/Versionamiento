@@ -4,7 +4,7 @@
 - Grupo de cada integrante: **[A/B POR COMPLETAR]**.
 - Contribución humana: **[CADA INTEGRANTE DEBE DECLARAR Y COMPRENDER SU APORTE]**.
 - GitHub solicitado: https://github.com/angiedonatto/Versionamiento
-- Revisión base del paquete: `37a7b2ebe7551ad4f1c37f7ef4e5a4f726f7d2d9`. El commit final de empaquetado se registra en `revision-entrega.txt` junto al ZIP y en el historial Git; no se inventa una autorreferencia de commit.
+- Revisión base del paquete: `401293f71a9dcac2b676d58a2b611af0f775fa36`. El commit final de empaquetado se registra en `revision-entrega.txt` junto al ZIP y en el historial Git; no se inventa una autorreferencia de commit.
 - Publicación GitHub: PUSH Y CLON REMOTO VERIFICADOS. El usuario autorizó publicar incluso si el repositorio es público; no se cambió su privacidad.
 - Acceso de la cuenta del docente: no comprobado; si el repositorio es privado, conceder lectura mediante invitación.
 - Historial sin dependencia de GitHub: `historial.bundle` dentro del ZIP; `git clone historial.bundle proyecto`.
@@ -55,7 +55,8 @@
 - `informe.pdf`: máximo cinco páginas; generado desde evidencia real.
 - **`dvc-storage.zip` se entrega aparte**. Extraer junto al proyecto: debe quedar `../dvc-storage`. `.dvc/config` configura remote `entrega`. Ejecutar `DVC_SITE_CACHE_DIR="$PWD/.runtime/dvc-site" dvc pull`.
 - Ubicación de los tres entregables: directorio de entrega `/workspace/entrega-defiende/` de esta tarea. No es un servicio público: descargar y adjuntar al canal del profesor, o compartir carpeta con permiso de lectura. Sin esa acción no se afirma acceso docente.
-- Distribución GitHub (privada; requiere permiso de lectura): https://github.com/angiedonatto/Versionamiento/releases/tag/entrega-final-2026-10-30 . La evidencia de publicación y descarga se adjunta como `verificacion-publicacion.json` junto a los entregables.
+- Distribución privada de archivos: https://huggingface.co/datasets/angiedonatto/defiende-el-servidor-entregables . El SHA inmutable de la entrega y los enlaces directos de descarga se guardan en `verificacion-publicacion.json`, junto a los archivos.
+- Índice GitHub de entrega: https://github.com/angiedonatto/Versionamiento/releases/tag/entrega-verificada-2026-10-30 . La carga binaria a uploads.github.com falló con HTTP 401; se usa almacenamiento HF privado separado, sin tocar las revisiones congeladas de modelos.
 - `auditoria-cumplimiento.md` y `.json` junto al ZIP: auditoría definitiva de los ocho requisitos y de cada componente de la rúbrica, incluidos pendientes administrativos.
 
 ## Ejecución medida y limitaciones
