@@ -154,7 +154,7 @@ def main():
 - **`dvc-storage.zip` se entrega aparte**. Extraer junto al proyecto: debe quedar `../dvc-storage`. `.dvc/config` configura remote `entrega`. Ejecutar `DVC_SITE_CACHE_DIR="$PWD/.runtime/dvc-site" dvc pull`.
 - Ubicación de los tres entregables: directorio de entrega `/workspace/entrega-defiende/` de esta tarea. No es un servicio público: descargar y adjuntar al canal del profesor, o compartir carpeta con permiso de lectura. Sin esa acción no se afirma acceso docente.
 - Distribución privada de archivos: https://huggingface.co/datasets/angiedonatto/defiende-el-servidor-entregables . El SHA inmutable de la entrega y los enlaces directos de descarga se guardan en `verificacion-publicacion.json`, junto a los archivos.
-- Índice GitHub de entrega: https://github.com/angiedonatto/Versionamiento/releases/tag/entrega-verificada-2026-10-30 . La carga binaria a uploads.github.com falló con HTTP 401; se usa almacenamiento HF privado separado, sin tocar las revisiones congeladas de modelos.
+- Índice GitHub previsto para la entrega final: https://github.com/angiedonatto/Versionamiento/releases/tag/entrega-verificada-2026-10-30 . Su publicación y los enlaces de archivos sólo se consideran comprobados cuando figuran en verificacion-publicacion.json. La carga binaria a uploads.github.com falló con HTTP 401; la alternativa HF privada requiere autorización para los archivos, sin tocar los modelos congelados.
 - `auditoria-cumplimiento.md` y `.json` junto al ZIP: auditoría definitiva de los ocho requisitos y de cada componente de la rúbrica, incluidos pendientes administrativos.
 
 ## Ejecución medida y limitaciones

@@ -141,10 +141,12 @@ después de la evaluación original y se verifica que el artefacto es el mismo.
 La auditoría definitiva de los ocho requisitos y los 100 puntos se entrega en
 `auditoria-cumplimiento.md` y `.json` junto al ZIP. La prueba de lectura del
 profesor y los datos personales se distinguen de las comprobaciones técnicas.
-Los archivos se distribuyen en un repositorio HF **de tipo dataset y privado**,
+El destino preparado para los archivos es un repositorio HF **de tipo dataset y privado**,
 separado del repositorio de modelos:
 https://huggingface.co/datasets/angiedonatto/defiende-el-servidor-entregables .
-Los enlaces `resolve/<SHA>/...` y sus hashes figuran en la verificación final.
+Sólo se considera completada la distribución cuando la verificación final
+contiene los enlaces `resolve/<SHA>/...` y las huellas de descargas efectivamente
+ejecutadas. Si falta esa evidencia, usar los archivos locales y revisar el bloqueo.
 GitHub permitió publicar el código pero rechazó sus adjuntos binarios con HTTP
 401 en uploads.github.com; no se extrajeron ni reemplazaron credenciales para
 evitarlo. La distribución alternativa no modifica v1/v2 ni sus SHA.
