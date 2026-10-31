@@ -1,0 +1,17 @@
+{
+  "created_at_utc": "2026-10-31T01:26:28.225693+00:00",
+  "published_to_hf": false,
+  "status": "Bundles completos preparados localmente. No tienen SHA remoto HF; publicación bloqueada por token faltante.",
+  "versions": {
+    "v1": {
+      "pipeline_sha256": "379b81212257ce54700242b7568e75ba5cc76d444cd25101dc589494bd9d6f40",
+      "config_sha256": "184f387fec90c513824d3b4f7970cbaeab0b3057bf97b7f266cd8c39d1f53890",
+      "model_card_sha256": "2a72cdac2f4b32ac2afd68fa7a40754ece9916bea88c9932883f16bd185940a9"
+    },
+    "v2": {
+      "pipeline_sha256": "a2d7aebf559a8393bb55a3ad80f698d1777bfe971eed850f463bbc6d96cdc95c",
+      "config_sha256": "3029e1253a2ddf5ac4884c22d454491066deb4fce3db28f76d6f385e09685abc",
+      "model_card_sha256": "a686cac64157d1b100f22255e2420f9c687f10328e90759817fa4ce3dfeb6cfe"
+    }
+  }
+}

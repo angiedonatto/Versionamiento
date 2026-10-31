@@ -4,7 +4,7 @@
 - Grupo de cada integrante: **[A/B POR COMPLETAR]**.
 - Contribución humana: **[CADA INTEGRANTE DEBE DECLARAR Y COMPRENDER SU APORTE]**.
 - GitHub solicitado: https://github.com/angiedonatto/Versionamiento
-- Revisión base del paquete: `c2be4f43732558918afdda9f89bd5a91193b1cee`. El commit final de empaquetado se registra en `revision-entrega.txt` junto al ZIP y en el historial Git; no se inventa una autorreferencia de commit.
+- Revisión base del paquete: `ba3be2d4ebff9a2637d95bd5c54ec123c3b78c46`. El commit final de empaquetado se registra en `revision-entrega.txt` junto al ZIP y en el historial Git; no se inventa una autorreferencia de commit.
 - Publicación GitHub/acceso docente: BLOQUEADO/NO COMPROBADO; API devuelve Forbidden, no se pudo verificar privacidad. No se subieron datos ni código a un repo cuya privacidad no está comprobada.
 - Historial sin dependencia de GitHub: `historial.bundle` dentro del ZIP; `git clone historial.bundle proyecto`.
 
@@ -41,6 +41,7 @@
 - `data/raw.dvc`, `data/processed.dvc`, `.dvc/config`, `.dvcignore`: referencias de ambas versiones de datos.
 - `evidencias/experimentos.csv`, `evidencias/umbrales-validation.json`: cuatro experimentos y comparación de umbrales.
 - `evidencias/mlflow/<run_id>/`: entidad real exportada `mlflow-record.json`, metadatos `run.json` y pipeline completo `pipeline.joblib`.
+- `evidencias/modelos/v1/` y `v2/`: bundles completos preparados localmente, con pipeline, threshold/config, model card, features y dependencias. No equivalen a publicación ni descarga desde HF.
 - `evidencias/seleccion.json`: decisión de validation fechada, incluida en tag v2 antes de test; no se modifica después de test.
 - `evidencias/metricas-test.json`, `predicciones-test.csv`, `recalculo-test.json`: test completo y comprobación por CSV.
 - `evidencias/recuperacion/`: muestra fija de 64 filas, salidas antes/después (estas últimas sólo si HF funciona), hashes, log y resultado real.

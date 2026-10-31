@@ -135,6 +135,7 @@ def main():
 - `data/raw.dvc`, `data/processed.dvc`, `.dvc/config`, `.dvcignore`: referencias de ambas versiones de datos.
 - `evidencias/experimentos.csv`, `evidencias/umbrales-validation.json`: cuatro experimentos y comparación de umbrales.
 - `evidencias/mlflow/<run_id>/`: entidad real exportada `mlflow-record.json`, metadatos `run.json` y pipeline completo `pipeline.joblib`.
+- `evidencias/modelos/v1/` y `v2/`: bundles completos preparados localmente, con pipeline, threshold/config, model card, features y dependencias. No equivalen a publicación ni descarga desde HF.
 - `evidencias/seleccion.json`: decisión de validation fechada, incluida en tag v2 antes de test; no se modifica después de test.
 - `evidencias/metricas-test.json`, `predicciones-test.csv`, `recalculo-test.json`: test completo y comprobación por CSV.
 - `evidencias/recuperacion/`: muestra fija de 64 filas, salidas antes/después (estas últimas sólo si HF funciona), hashes, log y resultado real.

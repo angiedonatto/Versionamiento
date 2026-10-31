@@ -1,0 +1,56 @@
+{
+  "id": "tree_d16",
+  "hypothesis": "Mayor profundidad captura patrones de ataque raros; puede elevar falsos positivos.",
+  "change": "profundidad 16 y hojas >=5",
+  "family": "DecisionTreeClassifier",
+  "params": {
+    "max_depth": 16,
+    "min_samples_leaf": 5
+  },
+  "seed": 20261016,
+  "git_commit": "d7e3d35b724fc5828a79cdd68200fc560194a54d",
+  "dvc_reference": {
+    "data/raw.dvc": {
+      "sha256": "aef69f0eb635b870b7d72e66e9ebdc27c29ad9f22df065bb6405aa6db29d6870",
+      "contents": "outs:\n- md5: fe93051ae209ffb0128a31e7a478c009.dir\n  size: 47673818\n  nfiles: 2\n  hash: md5\n  path: raw\n"
+    },
+    "data/processed.dvc": {
+      "sha256": "8a3465fc54393b03148751c2c1db1422ca8c1ed48adb307fac757d16eade75a6",
+      "contents": "outs:\n- md5: 6b14e097de5c2d61d457699b6e63113f.dir\n  size: 71156267\n  nfiles: 4\n  hash: md5\n  path: processed\n"
+    }
+  },
+  "mlflow_run_id": "d5002ef5f9544389ab3597c526771740",
+  "threshold": 0.5,
+  "threshold_rule": "score_attack >= threshold",
+  "model_sha256": "a2d7aebf559a8393bb55a3ad80f698d1777bfe971eed850f463bbc6d96cdc95c",
+  "validation": {
+    "recall_attack": 0.9599983453296931,
+    "precision_attack": 0.9630659418184836,
+    "fpr": 0.07871230211373485,
+    "macro_f1": 0.9398455412454236,
+    "accuracy": 0.947662129026803,
+    "tn": 10417,
+    "fp": 890,
+    "fn": 967,
+    "tp": 23207,
+    "confusion_matrix": [
+      [
+        10417,
+        890
+      ],
+      [
+        967,
+        23207
+      ]
+    ],
+    "positive_class": 1,
+    "zero_division": 0
+  },
+  "elapsed_seconds": 5.054063664000012,
+  "max_rss_kib_process": 560292,
+  "warnings": [],
+  "converged": true,
+  "finished_at_utc": "2026-10-31T01:21:32.821882+00:00",
+  "version": "v2",
+  "created_at_utc": "2026-10-31T01:21:44.576650+00:00"
+}
