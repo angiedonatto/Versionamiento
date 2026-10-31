@@ -1,0 +1,2 @@
+2026/10/31 01:20:28 INFO mlflow.tracking.fluent: Experiment with name 'defiende-el-servidor' does not exist. Creating a new experiment.
+lr_c01 dbabc72d10584079894a1d4829fb4ddc {'recall_attack': 0.9891205427318607, 'precision_attack': 0.9176068769667665, 'fpr': 0.18988237375077385, 'macro_f1': 0.9178829910834567, 'accuracy': 0.9320763225388236, 'tn': 9160, 'fp': 2147, 'fn': 263, 'tp': 23911, 'confusion_matrix': [[9160, 2147], [263, 23911]], 'positive_class': 1, 'zero_division': 0} seconds 3.131079891000013

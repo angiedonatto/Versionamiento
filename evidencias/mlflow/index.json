@@ -1,0 +1,7 @@
+{
+  "tracking": "MLflow local file store; exportacion portable en run_id/run.json + pipeline.joblib",
+  "runs": [
+    "dbabc72d10584079894a1d4829fb4ddc"
+  ],
+  "exported_at_utc": "2026-10-31T01:20:31.596578+00:00"
+}
