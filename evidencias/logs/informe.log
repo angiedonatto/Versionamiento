@@ -1,0 +1,5 @@
+
+[2026-10-31T01:24:04.928227+00:00] cwd=/workspace/Versionamiento
+$ /workspace/defiende-venv/bin/python -m src.report
+Informe 4 páginas; entrega.md generado. PDF SHA256 519fda75776ac72598d3e6b4828d948227ae80e03fed1d5684526819a4731c7f
+{"command": ["/workspace/defiende-venv/bin/python", "-m", "src.report"], "started_at_utc": "2026-10-31T01:24:04.928227+00:00", "finished_at_utc": "2026-10-31T01:24:06.203399+00:00", "elapsed_seconds": 1.2751989949999825, "exit_code": 0}

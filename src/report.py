@@ -86,6 +86,10 @@ def main():
     if recovery:
         p(f'Recuperación real: carpeta nueva, venv nuevo, pip sin caché y cachés DVC/HF nuevas. Inicio {recovery["started_at_utc"]}; duración {recovery["elapsed_seconds"]:.3f} s. DVC pasó: {recovery.get("dvc_passed",False)}. Recuperación completa de ambas revisiones HF: {recovery.get("passed",False)}. Log: evidencias/recuperacion/recuperacion.log. ' + str(recovery.get('blocker','')))
     p('Se guardaron 64 filas fijas de validation y predicciones de referencia para v1/v2 antes de recuperar. Para aprobar la recuperación se exige descarga por SHA HF completo, clases exactamente iguales y diferencia máxima de scores ≤1e-12. No se sustituye una descarga bloqueada por archivos locales.')
+    local_path=Path('evidencias/recuperacion/comprobacion-local-suplementaria.json')
+    if local_path.exists():
+        local=read_json(local_path)
+        p(f'Comprobación suplementaria desde el checkout nuevo y venv nuevo (fuente Git local, NO HF): {local["rows"]} filas, clases idénticas en v1/v2; diferencias máximas de scores {local["versions"]["v1"]["max_score_difference"]} y {local["versions"]["v2"]["max_score_difference"]}. Log: local-suplementaria-limpia.log. Esto no aprueba la recuperación exigida desde HF.')
     p(f'Recursos medidos: Linux {platform.machine()}, Python {platform.python_version()}, {os.cpu_count()} CPU visibles; límite de threads BLAS=2 en fit. Máximo RSS reportado por proceso de entrenamiento: {max(table.apply(lambda r: read_json(f"evidencias/mlflow/{r.mlflow_run_id}/run.json")["max_rss_kib_process"],axis=1))/1024:.1f} MiB (acumulado del proceso, no pico incremental por modelo). Tiempos individuales en experimentos.csv; auditoría {audit["elapsed_seconds"]:.3f} s.')
     p('GitHub: ' + ('acceso comprobado' if github.get('read_verified') else 'publicación/acceso NO comprobado: API bloqueada y privacidad sin verificar. El historial local recuperable se entrega en bundle.'))
     p('Contribuciones: Codex implementó y ejecutó descarga, auditoría, código, entrenamiento, trazabilidad y documentos. Nombres, grupos, contribuciones humanas y comprensión del trabajo deben ser completados/verificados por los integrantes; no se atribuyen aportes no informados. No se adaptó código externo de soluciones docentes. Dependencias externas se identifican en requirements.txt; datos atribuidos a UNSW.')
@@ -126,6 +130,7 @@ def main():
 - `evidencias/seleccion.json`: decisión de validation fechada, incluida en tag v2 antes de test; no se modifica después de test.
 - `evidencias/metricas-test.json`, `predicciones-test.csv`, `recalculo-test.json`: test completo y comprobación por CSV.
 - `evidencias/recuperacion/`: muestra fija de 64 filas, salidas antes/después (estas últimas sólo si HF funciona), hashes, log y resultado real.
+- `comprobacion-local-suplementaria.json` y `local-suplementaria-limpia.log`: prueba adicional exitosa de ambas versiones desde Git local en checkout/venv nuevos; no sustituye HF. Los archivos `v*-local-despues.csv` se distinguen de las salidas HF.
 - `evidencias/verificacion-final.json`: distingue verificado de pendiente/bloqueado.
 - `README.md`: comandos exactos para instalación, DVC pull, reproducir un experimento, descargar por SHA y predecir.
 - `proyecto.zip`: código, evidencias y bundle Git; sin CSV masivos, entornos ni cachés.

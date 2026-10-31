@@ -1,0 +1,13 @@
+{
+  "pages": 4,
+  "sha256": "519fda75776ac72598d3e6b4828d948227ae80e03fed1d5684526819a4731c7f",
+  "generated_at_utc": "2026-10-31T01:24:06.087149+00:00",
+  "numeric_sources": [
+    "auditoria.json",
+    "experimentos.csv",
+    "seleccion.json",
+    "metricas-test.json",
+    "recuperacion/resultado.json"
+  ],
+  "method": "Cifras renderizadas directamente desde JSON/CSV; páginas comprobadas con pypdf."
+}

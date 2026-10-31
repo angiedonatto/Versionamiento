@@ -9,15 +9,29 @@ from .common import read_json, write_json, sha, now, git_head, metrics, predict_
 
 def bundle(version, experiment, threshold):
     source = Path('models') / experiment
+    if not (source / 'pipeline.joblib').exists():
+        row = pd.read_csv('evidencias/experimentos.csv').set_index('id').loc[experiment]
+        exported = Path('evidencias/mlflow') / row.mlflow_run_id
+        source.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(exported / 'pipeline.joblib', source / 'pipeline.joblib')
+        shutil.copy2(exported / 'run.json', source / 'metadata.json')
     dest = Path('models') / version
     dest.mkdir(parents=True, exist_ok=True)
     shutil.copy2(source / 'pipeline.joblib', dest / 'pipeline.joblib')
     shutil.copy2('requirements.txt', dest / 'requirements.txt')
     shutil.copy2('data/processed/features.json', dest / 'features.json')
     config = read_json(source / 'metadata.json')
-    val = pd.read_csv(source / 'validation_scores.csv')
+    if (source / 'validation_scores.csv').exists():
+        val = pd.read_csv(source / 'validation_scores.csv')
+        validation = metrics(val.y_true, val.score_attack >= threshold)
+    elif float(threshold) == float(config['threshold']):
+        validation = config['validation']
+    else:
+        from .common import scores
+        val = pd.read_csv('data/processed/validation.csv')
+        validation = metrics(val.label, scores(joblib.load(source / 'pipeline.joblib'), val) >= threshold)
     config.update({'version': version, 'threshold': float(threshold),
-                   'validation': metrics(val.y_true, val.score_attack >= threshold),
+                   'validation': validation,
                    'created_at_utc': now()})
     write_json(dest / 'config.json', config)
     m = config['validation']
@@ -76,6 +90,15 @@ confiable y verificar SHA256.
     (dest / 'README.md').write_text(card)
     return config
 
+def stage_versions():
+    """Reconstruye carpetas publicables desde exportación, sin fit ni selección."""
+    for version in ['v1','v2']:
+        expected = read_json(f'evidencias/{version}.json')
+        actual = bundle(version, expected['id'], expected['threshold'])
+        assert actual['model_sha256'] == expected['model_sha256']
+        assert sha(f'models/{version}/pipeline.joblib') == expected['model_sha256']
+        write_json(f'models/{version}/config.json', expected)
+
 def select():
     if Path('evidencias/seleccion.json').exists():
         raise RuntimeError('Seleccion ya congelada; no sobrescribir.')
@@ -117,6 +140,7 @@ def publish(repo):
     info = api.create_repo(repo_id=repo, repo_type='model', private=True, exist_ok=True)
     if not api.model_info(repo).private:
         raise RuntimeError('El repositorio HF existente es público; no subir sin autorización.')
+    stage_versions()
     records = read_json('evidencias/huggingface.json') if Path('evidencias/huggingface.json').exists() else {}
     for version in ['v1', 'v2']:
         if version in records:
@@ -185,13 +209,14 @@ def predict(model_dir, input_path, output):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('action', choices=['select','publish','test','recompute','predict'])
+    parser.add_argument('action', choices=['select','stage','publish','test','recompute','predict'])
     parser.add_argument('--repo')
     parser.add_argument('--model-dir')
     parser.add_argument('--input')
     parser.add_argument('--output')
     args = parser.parse_args()
     if args.action == 'select': select()
+    elif args.action == 'stage': stage_versions()
     elif args.action == 'publish': publish(args.repo)
     elif args.action == 'test': evaluate_test()
     elif args.action == 'recompute': recompute()
