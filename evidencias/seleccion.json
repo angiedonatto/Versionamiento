@@ -23,7 +23,7 @@
   "hf_repo": null,
   "hf_sha": null,
   "test_evaluated_at_selection": false,
-  "reason": "Regla predeclarada en configs/experiments.json; cambio de familia/parametros y umbral respecto a v1; 4 configuraciones, misma validation.",
+  "reason": "Regla predeclarada: cuatro configuraciones con la misma validation; v2 cambia a arbol profundidad 16/hojas >=5. Se exploran 17 umbrales por configuracion y se conserva 0.5. Sin etiquetas ni metricas test.",
   "v1_validation": {
     "recall_attack": 0.9891205427318607,
     "precision_attack": 0.9176068769667665,
