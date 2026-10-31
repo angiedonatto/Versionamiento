@@ -1,0 +1,10 @@
+
+[2026-10-31T01:31:15.018395+00:00] cwd=/workspace/Versionamiento
+$ git push origin HEAD:main --tags
+To https://github.com/angiedonatto/Versionamiento.git
+ * [new branch]      HEAD -> main
+ * [new tag]         datos-originales -> datos-originales
+ * [new tag]         datos-preparados -> datos-preparados
+ * [new tag]         v1 -> v1
+ * [new tag]         v2 -> v2
+{"command": ["git", "push", "origin", "HEAD:main", "--tags"], "started_at_utc": "2026-10-31T01:31:15.018395+00:00", "finished_at_utc": "2026-10-31T01:31:17.140543+00:00", "elapsed_seconds": 2.1221804670001347, "exit_code": 0}

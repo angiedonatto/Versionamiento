@@ -51,7 +51,9 @@ Integrantes y grupo por persona: [COMPLETAR NOMBRES COMPLETOS Y GRUPO].
 Comparto la implementación y evidencias ejecutadas del taller.
 Repositorio de código solicitado: https://github.com/angiedonatto/Versionamiento
 Commit local final de esta entrega: {commit}
-IMPORTANTE: verificar publicación del commit y concederle acceso antes de enviar.
+La publicación se verifica con Git push y lectura remota; evidencia en github.json
+y verificacion-publicacion.json junto a estos archivos. El acceso de su cuenta
+debe comprobarse antes de enviar si el repositorio es privado.
 Revisiones locales v1: {refs['v1']}; v2: {refs['v2']}.
 Modelos:
 {model_lines}

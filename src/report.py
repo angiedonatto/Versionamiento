@@ -99,7 +99,7 @@ def main():
         local=read_json(local_path)
         p(f'Comprobación suplementaria desde el checkout nuevo y venv nuevo (fuente Git local, NO HF): {local["rows"]} filas, clases idénticas en v1/v2; diferencias máximas de scores {local["versions"]["v1"]["max_score_difference"]} y {local["versions"]["v2"]["max_score_difference"]}. Log: local-suplementaria-limpia.log. Esto no aprueba la recuperación exigida desde HF.')
     p(f'Recursos medidos: Linux {platform.machine()}, Python {platform.python_version()}, {os.cpu_count()} CPU visibles; límite de threads BLAS=2 en fit. Máximo RSS reportado por proceso de entrenamiento: {max(table.apply(lambda r: read_json(f"evidencias/mlflow/{r.mlflow_run_id}/run.json")["max_rss_kib_process"],axis=1))/1024:.1f} MiB (acumulado del proceso, no pico incremental por modelo). Tiempos individuales en experimentos.csv; auditoría {audit["elapsed_seconds"]:.3f} s.')
-    p('GitHub: ' + ('acceso comprobado' if github.get('read_verified') else 'publicación/acceso NO comprobado: API bloqueada y privacidad sin verificar. El historial local recuperable se entrega en bundle.'))
+    p('GitHub: ' + ('push y lectura desde un clon remoto nuevos comprobados. El usuario autorizó publicar incluso si el repositorio es público. El acceso de la cuenta del docente no se ha comprobado.' if github.get('read_verified') else 'publicación/acceso NO comprobado; consultar los bloqueos de acceso. El historial local recuperable se entrega en bundle.'))
     p('Contribuciones: Codex implementó y ejecutó descarga, auditoría, código, entrenamiento, trazabilidad y documentos. Nombres, grupos, contribuciones humanas y comprensión del trabajo deben ser completados/verificados por los integrantes; no se atribuyen aportes no informados. No se adaptó código externo de soluciones docentes. Dependencias externas se identifican en requirements.txt; datos atribuidos a UNSW.')
     p('Fuentes: PDF del profesor (16-10-2026); research.unsw.edu.au/projects/unsw-nb15-dataset; mirror Nir-J/ML-Projects commit 44bbd02b9e70f74dd915218d5eb702f125341ffc; git-scm.com/doc; doc.dvc.org/start; mlflow.org/docs/latest/ml/tracking; huggingface.co/docs/huggingface_hub/guides/download; scikit-learn.org/stable/common_pitfalls.html.')
     doc=SimpleDocTemplate(str(root / 'informe.pdf'),pagesize=A4,rightMargin=50,leftMargin=50,topMargin=38,bottomMargin=38)
@@ -120,7 +120,8 @@ def main():
 - Contribución humana: **[CADA INTEGRANTE DEBE DECLARAR Y COMPRENDER SU APORTE]**.
 - GitHub solicitado: https://github.com/angiedonatto/Versionamiento
 - Revisión base del paquete: `{final}`. El commit final de empaquetado se registra en `revision-entrega.txt` junto al ZIP y en el historial Git; no se inventa una autorreferencia de commit.
-- Publicación GitHub/acceso docente: {"verificado" if github.get("read_verified") else "BLOQUEADO/NO COMPROBADO; API devuelve Forbidden, no se pudo verificar privacidad. No se subieron datos ni código a un repo cuya privacidad no está comprobada."}
+- Publicación GitHub: {"PUSH Y CLON REMOTO VERIFICADOS. El usuario autorizó publicar incluso si el repositorio es público; no se cambió su privacidad." if github.get("read_verified") else "PENDIENTE/NO COMPROBADA; consultar logs de acceso."}
+- Acceso de la cuenta del docente: no comprobado; si el repositorio es privado, conceder lectura mediante invitación.
 - Historial sin dependencia de GitHub: `historial.bundle` dentro del ZIP; `git clone historial.bundle proyecto`.
 
 ## Trazabilidad por versión
@@ -178,9 +179,11 @@ Datos de UNSW-NB15 con atribución y condiciones académicas de la fuente oficia
    cuenta del token. Sólo ejecutar si no existe ya publicación registrada; preserva SHA.
 3. `git add evidencias/huggingface.json evidencias/publicacion-congelada.json && git commit -m 'publicar referencias HF verificables'`.
 4. `python -m src.recover --storage ../dvc-storage.zip --git-source . --revision HEAD`.
-5. `gh api repos/angiedonatto/Versionamiento --jq .private` debe confirmar `true`
-   antes de push. Si es público, cambiarlo a privado en ajustes GitHub (o autorizar
-   publicación pública expresamente). Después `git push origin HEAD:main --tags`.
+5. GitHub: el usuario autorizó expresamente publicar incluso si el repositorio
+   es público. No volver a pedir autorización ni cambiar su privacidad. Actualizar
+   con `git push origin HEAD:main --tags` y comprobar el SHA con `git ls-remote`.
+   Un Forbidden de la API no demuestra que Git push esté bloqueado: usar la
+   operación Git requerida y el proxy suministrado.
 6. Verificar lectura GitHub/HF; invitar al docente con su usuario en cada plataforma.
 7. Regenerar informe, verificación y ZIP con las nuevas evidencias. No volver a
    evaluar test ni modificar pipeline, selección o umbral después del test.

@@ -54,7 +54,8 @@ def main():
     results['clean_dvc_pull'] = recovery.get('dvc_passed', False)
     results['hf_download_both_sha_and_predictions'] = recovery.get('passed', False)
     results['huggingface_publication'] = Path('evidencias/huggingface.json').exists()
-    results['github_access'] = read_json('evidencias/github.json') if Path('evidencias/github.json').exists() else 'bloqueado/no comprobado'
+    github = read_json('evidencias/github.json') if Path('evidencias/github.json').exists() else {}
+    results['github_access'] = bool(github.get('push_verified') and github.get('read_verified'))
     write_json('evidencias/verificacion-final.json', {'verified_at_utc': now(), 'checks': results,
                'all_required_passed': all(value is True for value in results.values())})
     print(json.dumps(results, indent=2))

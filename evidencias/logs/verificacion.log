@@ -26,3 +26,17 @@ $ /workspace/defiende-venv/bin/python -m src.verify
   "github_access": "bloqueado/no comprobado"
 }
 {"command": ["/workspace/defiende-venv/bin/python", "-m", "src.verify"], "started_at_utc": "2026-10-31T01:24:46.767535+00:00", "finished_at_utc": "2026-10-31T01:24:48.856941+00:00", "elapsed_seconds": 2.089429369999948, "exit_code": 0}
+
+[2026-10-31T01:32:14.162008+00:00] cwd=/workspace/Versionamiento
+$ /workspace/defiende-venv/bin/python -m src.verify
+{
+  "audit_group_split_no_leak": true,
+  "four_mlflow_runs_reloaded_and_validation_recomputed": true,
+  "git_v1_v2_and_frozen_selection": true,
+  "test_82332_and_recalculation": true,
+  "clean_dvc_pull": true,
+  "hf_download_both_sha_and_predictions": false,
+  "huggingface_publication": false,
+  "github_access": true
+}
+{"command": ["/workspace/defiende-venv/bin/python", "-m", "src.verify"], "started_at_utc": "2026-10-31T01:32:14.162008+00:00", "finished_at_utc": "2026-10-31T01:32:16.173637+00:00", "elapsed_seconds": 2.0116353190001064, "exit_code": 0}

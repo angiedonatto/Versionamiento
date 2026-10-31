@@ -19,6 +19,10 @@
   masivos. No se sobreescribió trabajo preexistente del usuario.
 - Los logs `publicacion-hf.log` y `github-privacidad.log` registran los bloqueos
   reales de autenticación/configuración. No prueban publicación ni recuperación HF.
+- Actualización: el usuario autorizó expresamente publicar en GitHub incluso si
+  el repositorio es público. El push real de main y los tags pasó, y se comprobó
+  lectura con ls-remote y un clon remoto nuevo. El Forbidden de la API no impidió
+  las operaciones Git mediante el proxy. Ver evidencias/github.json y logs GitHub.
 - La recuperación independiente con DVC y nuevo venv pasó; el resultado global
   quedó como `passed=false` porque faltaban revisiones Hugging Face publicadas.
   Cualquier comprobación local suplementaria se identifica por separado.

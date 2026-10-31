@@ -4,8 +4,9 @@
 - Grupo de cada integrante: **[A/B POR COMPLETAR]**.
 - Contribución humana: **[CADA INTEGRANTE DEBE DECLARAR Y COMPRENDER SU APORTE]**.
 - GitHub solicitado: https://github.com/angiedonatto/Versionamiento
-- Revisión base del paquete: `ba3be2d4ebff9a2637d95bd5c54ec123c3b78c46`. El commit final de empaquetado se registra en `revision-entrega.txt` junto al ZIP y en el historial Git; no se inventa una autorreferencia de commit.
-- Publicación GitHub/acceso docente: BLOQUEADO/NO COMPROBADO; API devuelve Forbidden, no se pudo verificar privacidad. No se subieron datos ni código a un repo cuya privacidad no está comprobada.
+- Revisión base del paquete: `1e5a76f75ca2ff40301ececf37cdc021cefee860`. El commit final de empaquetado se registra en `revision-entrega.txt` junto al ZIP y en el historial Git; no se inventa una autorreferencia de commit.
+- Publicación GitHub: PUSH Y CLON REMOTO VERIFICADOS. El usuario autorizó publicar incluso si el repositorio es público; no se cambió su privacidad.
+- Acceso de la cuenta del docente: no comprobado; si el repositorio es privado, conceder lectura mediante invitación.
 - Historial sin dependencia de GitHub: `historial.bundle` dentro del ZIP; `git clone historial.bundle proyecto`.
 
 ## Trazabilidad por versión
@@ -85,9 +86,11 @@ Datos de UNSW-NB15 con atribución y condiciones académicas de la fuente oficia
    cuenta del token. Sólo ejecutar si no existe ya publicación registrada; preserva SHA.
 3. `git add evidencias/huggingface.json evidencias/publicacion-congelada.json && git commit -m 'publicar referencias HF verificables'`.
 4. `python -m src.recover --storage ../dvc-storage.zip --git-source . --revision HEAD`.
-5. `gh api repos/angiedonatto/Versionamiento --jq .private` debe confirmar `true`
-   antes de push. Si es público, cambiarlo a privado en ajustes GitHub (o autorizar
-   publicación pública expresamente). Después `git push origin HEAD:main --tags`.
+5. GitHub: el usuario autorizó expresamente publicar incluso si el repositorio
+   es público. No volver a pedir autorización ni cambiar su privacidad. Actualizar
+   con `git push origin HEAD:main --tags` y comprobar el SHA con `git ls-remote`.
+   Un Forbidden de la API no demuestra que Git push esté bloqueado: usar la
+   operación Git requerida y el proxy suministrado.
 6. Verificar lectura GitHub/HF; invitar al docente con su usuario en cada plataforma.
 7. Regenerar informe, verificación y ZIP con las nuevas evidencias. No volver a
    evaluar test ni modificar pipeline, selección o umbral después del test.

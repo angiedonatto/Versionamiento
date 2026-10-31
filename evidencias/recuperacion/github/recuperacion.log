@@ -1,0 +1,17 @@
+
+[2026-10-31T01:32:03.075681+00:00] cwd=/workspace/defiende-github-recuperado
+$ /workspace/defiende-recuperacion-phe49i08/venv/bin/dvc pull
+A       data/processed/
+A       data/raw/
+8 files fetched and 6 files added
+{"command": ["/workspace/defiende-recuperacion-phe49i08/venv/bin/dvc", "pull"], "started_at_utc": "2026-10-31T01:32:03.075681+00:00", "finished_at_utc": "2026-10-31T01:32:04.131331+00:00", "elapsed_seconds": 1.0556619859999046, "exit_code": 0}
+
+[2026-10-31T01:32:05.208809+00:00] cwd=/workspace/defiende-github-recuperado
+$ /workspace/defiende-recuperacion-phe49i08/venv/bin/python -m src.recovery_check --output /workspace/Versionamiento/evidencias/recuperacion/github
+DVC: todos los hashes raw/prepared coinciden, venv= /workspace/defiende-recuperacion-phe49i08/venv
+{"command": ["/workspace/defiende-recuperacion-phe49i08/venv/bin/python", "-m", "src.recovery_check", "--output", "/workspace/Versionamiento/evidencias/recuperacion/github"], "started_at_utc": "2026-10-31T01:32:05.208809+00:00", "finished_at_utc": "2026-10-31T01:32:06.370486+00:00", "elapsed_seconds": 1.161686335000013, "exit_code": 0}
+
+[2026-10-31T01:32:07.421876+00:00] cwd=/workspace/defiende-github-recuperado
+$ /workspace/defiende-recuperacion-phe49i08/venv/bin/python -m src.local_recovery_check --output /workspace/Versionamiento/evidencias/recuperacion/github
+{'supplementary_local_git_only': True, 'hf_recovery_passed': False, 'git_commit': '1e5a76f75ca2ff40301ececf37cdc021cefee860', 'python_prefix': '/workspace/defiende-recuperacion-phe49i08/venv', 'rows': 64, 'sample_sha256': '96b7bc31927f42cdedda83bf23524b13f334d6e53948d7e25e3e3d76cfcf36ca', 'verified_at_utc': '2026-10-31T01:32:08.302755+00:00', 'tolerance': 1e-12, 'versions': {'v1': {'classes_exact': True, 'max_score_difference': 0.0, 'model_sha256': '379b81212257ce54700242b7568e75ba5cc76d444cd25101dc589494bd9d6f40', 'output_sha256': 'ca0a48b3c9c7bb913bb502f747b91e58c73c56d7fa4786f28dec41dea7b6f110'}, 'v2': {'classes_exact': True, 'max_score_difference': 0.0, 'model_sha256': 'a2d7aebf559a8393bb55a3ad80f698d1777bfe971eed850f463bbc6d96cdc95c', 'output_sha256': '24d7f23d440fa45f53925e2d6be96aa815a68f11102a5ba03a47ce888f0ecded'}}}
+{"command": ["/workspace/defiende-recuperacion-phe49i08/venv/bin/python", "-m", "src.local_recovery_check", "--output", "/workspace/Versionamiento/evidencias/recuperacion/github"], "started_at_utc": "2026-10-31T01:32:07.421876+00:00", "finished_at_utc": "2026-10-31T01:32:08.482745+00:00", "elapsed_seconds": 1.0608762849999493, "exit_code": 0}

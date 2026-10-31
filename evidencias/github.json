@@ -1,0 +1,22 @@
+{
+  "url": "https://github.com/angiedonatto/Versionamiento",
+  "push_verified": true,
+  "read_verified": true,
+  "clone_head": "1e5a76f75ca2ff40301ececf37cdc021cefee860",
+  "refs": {
+    "v1": "d7e3d35b724fc5828a79cdd68200fc560194a54d",
+    "v2": "fea17dd5fb017d3ceacf6cf94dadc274b5432d7e",
+    "datos-originales": "085fc858502052acbf38eaed09a1e4c93e155901",
+    "datos-preparados": "91b68ca202873d828a21f627473a61eee632d872"
+  },
+  "verified_at_utc": "2026-10-31T01:32:01.470471+00:00",
+  "remote_clone_path": "/workspace/defiende-github-recuperado",
+  "user_authorized_publication_even_if_public": true,
+  "privacy_changed": false,
+  "teacher_access_verified": false,
+  "logs": {
+    "evidencias/logs/github-push.log": "5ee55cdfd9483b41627f023c8dbc2aff01382830a60d62ddf3c7e26f15a275f1",
+    "evidencias/logs/github-lectura.log": "a41d77322d04710160fef130da8c343648dc85206af2af2d27f5f5a77b50579c",
+    "evidencias/recuperacion/github-clone.log": "f4280cc9ca82ffdc87cf349a6acb84b6bb9f272549b8598495fda5f0acc763aa"
+  }
+}

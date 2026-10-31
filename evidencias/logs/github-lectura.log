@@ -1,0 +1,8 @@
+
+[2026-10-31T01:31:29.114232+00:00] cwd=/workspace/Versionamiento
+$ git ls-remote origin HEAD refs/heads/main refs/tags/v1 refs/tags/v2
+1e5a76f75ca2ff40301ececf37cdc021cefee860	HEAD
+1e5a76f75ca2ff40301ececf37cdc021cefee860	refs/heads/main
+d7e3d35b724fc5828a79cdd68200fc560194a54d	refs/tags/v1
+fea17dd5fb017d3ceacf6cf94dadc274b5432d7e	refs/tags/v2
+{"command": ["git", "ls-remote", "origin", "HEAD", "refs/heads/main", "refs/tags/v1", "refs/tags/v2"], "started_at_utc": "2026-10-31T01:31:29.114232+00:00", "finished_at_utc": "2026-10-31T01:31:29.791315+00:00", "elapsed_seconds": 0.6770898580000448, "exit_code": 0}
